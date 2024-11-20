@@ -6,8 +6,6 @@ import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Lock the orientation to landscape modes
   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.landscapeLeft,
