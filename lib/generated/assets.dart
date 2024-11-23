@@ -9,6 +9,7 @@ class Assets {
   static const String iconsSchoolLevel = 'assets/icons/school_level.png';
   static const String imagesAstronaut = 'assets/images/astronaut.png';
   static const String imagesAstronaut1 = 'assets/images/astronaut1.png';
+  static const String logoLogo = 'assets/logo/logo.png';
   static const String srirachaSrirachaRegular = 'assets/fonts/Sriracha/Sriracha-Regular.ttf';
 
 }
