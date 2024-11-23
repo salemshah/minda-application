@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:minda_application/src/ui/screens/child/HomeScreen.dart';
+import 'package:minda_application/src/ui/screens/child/game_home_screen.dart';
 
 class CharacterSelectionScreen extends StatefulWidget {
   const CharacterSelectionScreen({super.key});
