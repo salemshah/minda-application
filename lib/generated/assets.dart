@@ -5,7 +5,10 @@ class Assets {
   static const String backgroundSpaceBackground = 'assets/images/background/space_background.jpeg';
   static const String backgroundSpaceBackground1 = 'assets/images/background/space_background1.jpg';
   static const String backgroundSpaceBackground2 = 'assets/images/background/space_background2.jpg';
+  static const String iconsCoin = 'assets/icons/coin.png';
+  static const String iconsSchoolLevel = 'assets/icons/school_level.png';
   static const String imagesAstronaut = 'assets/images/astronaut.png';
-  static const String srirachaSrirachaRegular = 'assets/fonts/sriracha/Sriracha-Regular.ttf';
+  static const String imagesAstronaut1 = 'assets/images/astronaut1.png';
+  static const String srirachaSrirachaRegular = 'assets/fonts/Sriracha/Sriracha-Regular.ttf';
 
 }

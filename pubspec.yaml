@@ -28,6 +28,7 @@ flutter:
   assets:
     - assets/images/background/
     - assets/images/
+    - assets/icons/
 
   fonts:
     - family: Sriracha

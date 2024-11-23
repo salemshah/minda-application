@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:minda_application/src/ui/screens/child/character_select_screen.dart';
 import 'package:minda_application/src/ui/widgets/labeled_text_form_field.dart';
 
 class LoginChildScreen extends StatelessWidget {
@@ -122,7 +123,9 @@ class _AuthFormState extends State<AuthForm> {
       // Form is valid, process the data
       print('Pseudo: ${_usernameController.text}');
       print('Password: ${_passwordController.text}');
-      // Handle form submission logic here
+
+      Navigator.push(context,
+          MaterialPageRoute(builder: (context) => CharacterSelectionScreen()));
     } else {
       print('Validation failed');
     }
