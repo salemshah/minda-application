@@ -1,8 +1,6 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 
 class GameHomeScreen extends StatelessWidget {
   const GameHomeScreen({super.key});
@@ -17,9 +15,7 @@ class GameHomeScreen extends StatelessWidget {
     const double statusBarThreshold = 20.0;
 
     // Determine whether to apply the margin
-    final bool applyMargin = isLandscape && topPadding < statusBarThreshold;
-
-    print("sssssss" + applyMargin.toString());
+    final bool isApplyHeight = isLandscape && topPadding < statusBarThreshold;
     return Scaffold(
       body: LayoutBuilder(builder: (context, constraint) {
         double height = constraint.maxHeight;
@@ -40,7 +36,7 @@ class GameHomeScreen extends StatelessWidget {
                 children: [
                   Column(
                     children: [
-                      SizedBox(height: height * .04),
+                      SizedBox(height: isApplyHeight ? height * .04 : 0),
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.white.withOpacity(.2),
@@ -62,9 +58,9 @@ class GameHomeScreen extends StatelessWidget {
                                   SizedBox(width: width * 0.01),
                                   Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
 // Adjust content alignment
                                     children: [
                                       Text(
@@ -81,9 +77,9 @@ class GameHomeScreen extends StatelessWidget {
                                         width: width * .15,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                          BorderRadius.circular(50),
+                                              BorderRadius.circular(50),
                                           border:
-                                          Border.all(color: Colors.white),
+                                              Border.all(color: Colors.white),
                                           color: Colors.blue,
                                         ),
                                       ),
@@ -129,7 +125,7 @@ class GameHomeScreen extends StatelessWidget {
                                 CupertinoIcons.gear_alt_fill,
                                 size: height * .07,
                                 semanticLabel:
-                                'Text to announce in accessibility modes',
+                                    'Text to announce in accessibility modes',
                               ),
                             ),
                           ],
@@ -166,7 +162,7 @@ class GameHomeScreen extends StatelessWidget {
                                   fit: BoxFit.cover,
                                 ),
                                 border:
-                                Border.all(color: Colors.white, width: 4),
+                                    Border.all(color: Colors.white, width: 4),
                               ),
                               width: height / 2,
                               height: height / 2,
@@ -226,7 +222,7 @@ class GameOptionButton extends StatelessWidget {
           backgroundColor: Colors.purple,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         ),
         onPressed: onPressed,
         icon: Icon(icon),
