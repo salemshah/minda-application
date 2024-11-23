@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:minda_application/src/ui/screens/child/HomeScreen.dart';
 import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
-import 'package:minda_application/src/ui/screens/child/test.dart';
 import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart';
 
 void main() {
