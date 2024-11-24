@@ -16,6 +16,7 @@ dependencies:
   flutter_svg: ^2.0.15
   flutter_screenutil: ^5.9.3
   tutorial_coach_mark: ^1.2.12
+  shared_preferences: ^2.3.3
 
 flutter_launcher_icons:
   android: "launcher_icon"
