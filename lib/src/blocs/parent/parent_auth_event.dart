@@ -1,4 +1,3 @@
-
 /// Base class for parent authentication events.
 abstract class ParentAuthEvent {}
 
@@ -15,6 +14,13 @@ class ParentRegisterRequested extends ParentAuthEvent {
     required this.lastName,
     required this.password,
   });
+}
+
+/// event for parent email verification
+class ParentEmailVerificationRequested extends ParentAuthEvent {
+  final String code;
+
+  ParentEmailVerificationRequested({required this.code});
 }
 
 /// Event for parent login.

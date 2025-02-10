@@ -21,8 +21,13 @@ class ParentRepository extends BaseRepository {
 
     // Using the reusable POST method.
     final response = await apiService.post('/auth/parent-register', data);
+    return response['message'];
+  }
 
-    // Expecting a response like: { "message": "..." }
+  Future<String> parentEmailVerification({required String code}) async {
+    final data = {"code": code};
+
+    final response = await apiService.post("/parent/verify-email", data);
     return response['message'];
   }
 }

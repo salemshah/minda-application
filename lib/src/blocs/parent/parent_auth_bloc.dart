@@ -5,20 +5,19 @@ import 'parent_auth_state.dart';
 
 class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
   final ParentRepository parentRepository;
+
   ParentAuthBloc({required this.parentRepository})
       : super(ParentAuthInitial()) {
+    // Handle parent registration events.
     on<ParentRegisterRequested>(_onRegisterRequested);
+    // Handle parent email verification event
+    on<ParentEmailVerificationRequested>(_parentEmailVerification);
   }
 
   /// Handles the ParentRegisterRequested event.
-  ///
-  /// This asynchronous function is called when a ParentRegisterRequested event is received.
-  /// It performs the registration process and emits new states based on the outcome.
   Future<void> _onRegisterRequested(
-      ParentRegisterRequested event, // The event carrying registration details.
-      Emitter<ParentAuthState> emit) async { // Function used to emit new states.
+      ParentRegisterRequested event, Emitter<ParentAuthState> emit) async {
     emit(ParentAuthLoading());
-
     try {
       final message = await parentRepository.registerParent(
         email: event.email,
@@ -26,9 +25,20 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
         lastName: event.lastName,
         password: event.password,
       );
-
       emit(ParentAuthSuccess(message: message));
+    } catch (e) {
+      emit(ParentAuthFailure(error: e.toString()));
+    }
+  }
 
+  Future<void> _parentEmailVerification(ParentEmailVerificationRequested event,
+      Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+    try {
+      final message = await parentRepository.parentEmailVerification(
+        code: event.code,
+      );
+      emit(ParentAuthSuccess(message: message));
     } catch (e) {
       emit(ParentAuthFailure(error: e.toString()));
     }

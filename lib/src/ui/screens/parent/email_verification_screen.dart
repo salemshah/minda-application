@@ -1,43 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_verification_code_field/flutter_verification_code_field.dart';
+import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
+import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
+import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 
-void main() {
-  runApp(const EmailVerificationScreen());
-}
-
-class EmailVerificationScreen extends StatelessWidget {
+class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Email Verification')),
-        body: const Padding(
-          padding: EdgeInsets.all(24),
-          child: MyCodeInput(),
-        ),
-      ),
-    );
-  }
+  State<EmailVerificationScreen> createState() =>
+      _EmailVerificationScreenState();
 }
 
-class MyCodeInput extends StatefulWidget {
-  const MyCodeInput({super.key});
-
-  @override
-  State<MyCodeInput> createState() => _MyCodeInputState();
-}
-
-class _MyCodeInputState extends State<MyCodeInput> {
+class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
   String _code = '';
   bool _isFilled = false;
 
   void _submitCode() {
     if (_code.length == 5) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Code $_code Submitted successfully! 🎉')),
-      );
+      BlocProvider.of<ParentAuthBloc>(context)
+          .add(ParentEmailVerificationRequested(code: _code.trim()));
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Please enter the full code')),
@@ -47,29 +30,57 @@ class _MyCodeInputState extends State<MyCodeInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        VerificationCodeField(
-          autofocus: true,
-          length: 5,
-          hasError: false, // Removed 'true' to avoid forced error
-          spaceBetween: 10,
-          placeholder: '•',
-          size: const Size(56, 62),
-          onFilled: (value) {
-            setState(() {
-              _code = value;
-              _isFilled = value.length == 5;
-            });
-          },
-        ),
-        const SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: _isFilled ? _submitCode : null,
-          child: const Text('Submit'),
-        ),
-      ],
+    return Scaffold(
+      appBar: AppBar(title: const Text('Email Verification')),
+      body: BlocConsumer<ParentAuthBloc, ParentAuthState>(
+          listener: (context, state) {
+        if (state is ParentAuthSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: Colors.green,
+            ),
+          );
+          // Navigator.push(
+          //   context,
+          //   MaterialPageRoute(
+          //       builder: (context) => const EmailVerificationScreen()),
+          // );
+        }
+        if (state is ParentAuthFailure) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.error),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }, builder: (context, state) {
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            VerificationCodeField(
+              autofocus: true,
+              length: 5,
+              hasError: false,
+              spaceBetween: 10,
+              // placeholder: '•',
+              size: const Size(40, 40),
+              onFilled: (value) {
+                setState(() {
+                  _code = value;
+                  _isFilled = value.length == 5;
+                });
+              },
+            ),
+            const SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: _isFilled ? _submitCode : null,
+              child: const Text('Confirmer'),
+            ),
+          ],
+        );
+      }),
     );
   }
 }
