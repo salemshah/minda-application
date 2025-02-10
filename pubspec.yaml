@@ -13,10 +13,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.8
+  flutter_bloc: ^9.0.0
   flutter_svg: ^2.0.15
   flutter_screenutil: ^5.9.3
   tutorial_coach_mark: ^1.2.12
   shared_preferences: ^2.3.3
+  rive: ^0.13.18
+  device_info_plus: ^11.1.1
+  flutter_verification_code_field: ^1.0.9
 
 flutter_launcher_icons:
   android: "launcher_icon"
@@ -36,8 +40,16 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/background/
+    - assets/icons/
     - assets/images/
     - assets/icons/
+    - assets/rive_files/
+    - lib/src/ui/screens/child/
+    - assets/
+    - assets/logo/
+    - assets/fonts/
+    - assets/fonts/Sriracha/
+    - lib/src/repositories/
 
   fonts:
     - family: Sriracha
