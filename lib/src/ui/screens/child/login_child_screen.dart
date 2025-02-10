@@ -1,6 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
 import 'package:minda_application/src/ui/screens/child/character_select_screen.dart';
 import 'package:minda_application/src/ui/widgets/labeled_text_form_field.dart';
 
@@ -9,68 +11,74 @@ class LoginChildScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          double height = constraints.maxHeight;
-          return Stack(
-            children: [
-              ImageFiltered(
-                imageFilter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 1),
-                child: Container(
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage(
-                          'assets/images/background/space_background2.jpg'),
-                      fit: BoxFit.cover,
+    return OrientationWrapper(
+      orientations: const [
+        DeviceOrientation.landscapeLeft,
+        DeviceOrientation.landscapeRight,
+      ],
+      child: Scaffold(
+        body: LayoutBuilder(
+          builder: (context, constraints) {
+            double height = constraints.maxHeight;
+            return Stack(
+              children: [
+                ImageFiltered(
+                  imageFilter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 1),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(
+                            'assets/images/background/space_background2.jpg'),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SafeArea(
-                child: SingleChildScrollView(
-                  child: Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          width: double.infinity,
-                          child: Center(
-                            child: Text(
-                              'Renseigne tes information',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 28.sp,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: 'Sriracha'),
+                SafeArea(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: double.infinity,
+                            child: Center(
+                              child: Text(
+                                'Renseigne tes information',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 28.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Sriracha'),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: 20.h),
-                        Row(
-                          children: [
-                            Expanded(
-                                flex: 3,
-                                child: Image.asset(
-                                  'assets/images/astronaut.png',
-                                  height: height * 0.5,
-                                )),
-                            SizedBox(width: 20),
-                            Expanded(
-                              flex: 5,
-                              child: AuthForm(height: height),
-                            )
-                          ],
-                        ),
-                      ],
+                          SizedBox(height: 20.h),
+                          Row(
+                            children: [
+                              Expanded(
+                                  flex: 3,
+                                  child: Image.asset(
+                                    'assets/images/astronaut.png',
+                                    height: height * 0.5,
+                                  )),
+                              SizedBox(width: 20),
+                              Expanded(
+                                flex: 5,
+                                child: AuthForm(height: height),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }
@@ -94,8 +102,8 @@ class _AuthFormState extends State<AuthForm> {
   final _formKey = GlobalKey<FormState>();
 
   // Controller for form fields
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController(text: 'username');
+  final TextEditingController _passwordController = TextEditingController(text: 'password');
 
   // Validation logic
   String? _validateUsername(String? value) {
