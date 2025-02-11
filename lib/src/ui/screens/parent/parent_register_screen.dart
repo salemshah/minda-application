@@ -61,7 +61,7 @@ class _ParentRegisterPageState extends State<ParentRegisterPage> {
         appBar: AppBar(title: const Text("Parent Registration")),
         body: BlocConsumer<ParentAuthBloc, ParentAuthState>(
           listener: (context, state) {
-            if (state is ParentAuthSuccess) {
+            if (state is ParentRegistrationSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
@@ -74,7 +74,7 @@ class _ParentRegisterPageState extends State<ParentRegisterPage> {
                     builder: (context) => const EmailVerificationScreen()),
               );
             }
-            if (state is ParentAuthFailure) {
+            if (state is ParentRegistrationFailure) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.error),
