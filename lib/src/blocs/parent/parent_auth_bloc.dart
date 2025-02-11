@@ -12,6 +12,7 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
     on<ParentRegisterRequested>(_onRegisterRequested);
     // Handle parent email verification event
     on<ParentEmailVerificationRequested>(_parentEmailVerification);
+    on<ParentResendEmailVerificationRequested>(_parentResendEmailVerification);
   }
 
   /// Handles the ParentRegisterRequested event.
@@ -25,9 +26,9 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
         lastName: event.lastName,
         password: event.password,
       );
-      emit(ParentAuthSuccess(message: message));
+      emit(ParentRegistrationSuccess(message: message, email: event.email));
     } catch (e) {
-      emit(ParentAuthFailure(error: e.toString()));
+      emit(ParentRegistrationFailure(error: e.toString()));
     }
   }
 
@@ -38,9 +39,23 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       final message = await parentRepository.parentEmailVerification(
         code: event.code,
       );
-      emit(ParentAuthSuccess(message: message));
+      emit(ParentEmailVerificationSuccess(message: message));
     } catch (e) {
-      emit(ParentAuthFailure(error: e.toString()));
+      emit(ParentEmailVerificationFailure(error: e.toString()));
+    }
+  }
+
+  Future<void> _parentResendEmailVerification(
+      ParentResendEmailVerificationRequested event,
+      Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+
+    try {
+      final message = await parentRepository.parentResendEmailVerification(
+          email: event.email);
+      emit(ParentResendVerificationSuccess(message: message));
+    } catch (e) {
+      emit(ParentResendVerificationSuccess(message: e.toString()));
     }
   }
 }

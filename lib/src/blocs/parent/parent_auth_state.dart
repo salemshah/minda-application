@@ -6,20 +6,47 @@ class ParentAuthInitial extends ParentAuthState {}
 
 class ParentAuthLoading extends ParentAuthState {}
 
-class ParentAuthSuccess extends ParentAuthState {
+/// State used when the parent registration succeeds
+class ParentRegistrationSuccess extends ParentAuthState {
   final String message;
+  final String email;
 
-  ParentAuthSuccess({required this.message});
+  ParentRegistrationSuccess({required this.message, required this.email});
 }
 
-class ParentAuthFailure extends ParentAuthState {
+/// State used when the parent registration failed
+class ParentRegistrationFailure extends ParentAuthState {
   final String error;
 
-  ParentAuthFailure({required this.error});
+  ParentRegistrationFailure({required this.error});
 }
 
-class ParentEmailVerificationSuccess extends ParentAuthState {
+/// State used when the resend email verification succeeds
+class ParentResendVerificationSuccess extends ParentAuthState {
+  final String message;
 
+  ParentResendVerificationSuccess({required this.message});
+}
+
+/// State used when the resend email verification failed
+class ParentResendVerificationFailure extends ParentAuthState {
+  final String message;
+
+  ParentResendVerificationFailure({required this.message});
+}
+
+/// State used when the email verification succeeds
+class ParentEmailVerificationSuccess extends ParentAuthState {
+  final String message;
+
+  ParentEmailVerificationSuccess({required this.message});
+}
+
+/// State used when the email verification failed
+class ParentEmailVerificationFailure extends ParentAuthState {
+  final String error;
+
+  ParentEmailVerificationFailure({required this.error});
 }
 
 /// State used when parent login succeeds and you want to pass a ParentModel.
@@ -27,4 +54,11 @@ class ParentLoginSuccess extends ParentAuthState {
   final ParentModel parent;
 
   ParentLoginSuccess({required this.parent});
+}
+
+/// State used when parent login succeeds and you want to pass a ParentModel.
+class ParentLoginFailure extends ParentAuthState {
+  final ParentModel message;
+
+  ParentLoginFailure({required this.message});
 }

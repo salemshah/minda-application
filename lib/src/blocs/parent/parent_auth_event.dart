@@ -16,11 +16,20 @@ class ParentRegisterRequested extends ParentAuthEvent {
   });
 }
 
-/// event for parent email verification
+/// event for parent email verification code
 class ParentEmailVerificationRequested extends ParentAuthEvent {
   final String code;
 
   ParentEmailVerificationRequested({required this.code});
+}
+
+/// event for parent resend email verification code
+class ParentResendEmailVerificationRequested extends ParentAuthEvent {
+  final String email;
+
+  ParentResendEmailVerificationRequested({
+    required this.email,
+  });
 }
 
 /// Event for parent login.

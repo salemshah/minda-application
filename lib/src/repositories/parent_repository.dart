@@ -30,4 +30,10 @@ class ParentRepository extends BaseRepository {
     final response = await apiService.post("/parent/verify-email", data);
     return response['message'];
   }
+
+  Future<String> parentResendEmailVerification({required String email}) async {
+    final data = {"email": email};
+    final response = await apiService.post("/parent/resend-verification-email", data);
+    return response['message'];
+  }
 }
