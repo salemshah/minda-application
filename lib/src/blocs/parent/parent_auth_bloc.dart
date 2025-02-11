@@ -2,20 +2,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minda_application/src/repositories/parent_repository.dart';
 import 'parent_auth_event.dart';
 import 'parent_auth_state.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
   final ParentRepository parentRepository;
 
   ParentAuthBloc({required this.parentRepository})
       : super(ParentAuthInitial()) {
-    // Handle parent registration events.
     on<ParentRegisterRequested>(_onRegisterRequested);
-    // Handle parent email verification event
     on<ParentEmailVerificationRequested>(_parentEmailVerification);
     on<ParentResendEmailVerificationRequested>(_parentResendEmailVerification);
+    on<ParentCompleteRegistrationRequested>(_parentCompleteRegistration);
   }
 
+  ///======================================================
   /// Handles the ParentRegisterRequested event.
+  /// =====================================================
   Future<void> _onRegisterRequested(
       ParentRegisterRequested event, Emitter<ParentAuthState> emit) async {
     emit(ParentAuthLoading());
@@ -32,6 +34,9 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
     }
   }
 
+  ///======================================================
+  /// handle ParentEmailVerificationRequested event
+  /// =====================================================
   Future<void> _parentEmailVerification(ParentEmailVerificationRequested event,
       Emitter<ParentAuthState> emit) async {
     emit(ParentAuthLoading());
@@ -45,6 +50,9 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
     }
   }
 
+  ///======================================================
+  /// handle ParentResendEmailVerificationRequested event
+  /// =====================================================
   Future<void> _parentResendEmailVerification(
       ParentResendEmailVerificationRequested event,
       Emitter<ParentAuthState> emit) async {
@@ -55,7 +63,30 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
           email: event.email);
       emit(ParentResendVerificationSuccess(message: message));
     } catch (e) {
-      emit(ParentResendVerificationSuccess(message: e.toString()));
+      emit(ParentResendVerificationFailure(message: e.toString()));
+    }
+  }
+
+  ///======================================================
+  /// handle ParentCompleteRegistration event
+  /// =====================================================
+  Future<void> _parentCompleteRegistration(
+      ParentCompleteRegistrationRequested event,
+      Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+
+    try {
+      final completeRegistrationResponse =
+          await parentRepository.parentCompleteRegistration(
+              birthDate: event.birthDate,
+              phoneNumber: event.phoneNumber,
+              addressPostal: event.addressPostal);
+      final message = completeRegistrationResponse.message;
+      final parent = completeRegistrationResponse.parent;
+
+      emit(ParentCompleteRegistrationSuccess(parent: parent, message: message));
+    } catch (e) {
+      emit(ParentCompleteRegistrationFailure(error: e.toString()));
     }
   }
 }

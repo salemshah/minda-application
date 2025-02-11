@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 // Import screens
 import 'package:minda_application/src/ui/screens/child/game_home_screen.dart';
 import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
 import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart';
 
@@ -70,6 +71,7 @@ class MindaApp extends StatelessWidget {
               minTextAdapt: true,
               splitScreenMode: true,
               builder: (context, child) {
+                // return const ParentCompleteRegistrationScreen();
                 return const SelectRoleScreen();
               },
             );

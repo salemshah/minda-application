@@ -20,11 +20,13 @@ class Assets {
   static const String imagesAstronaut1 = 'assets/images/astronaut1.png';
   static const String libMain = 'lib/main.dart';
   static const String logoMindaLogo = 'assets/logo/minda_logo.png';
-  static const String modelsParentModel = 'lib/src/models/parent_model.dart';
   static const String parentEmailVerificationScreen = 'lib/src/ui/screens/parent/email_verification_screen.dart';
   static const String parentParentAuthBloc = 'lib/src/blocs/parent/parent_auth_bloc.dart';
   static const String parentParentAuthEvent = 'lib/src/blocs/parent/parent_auth_event.dart';
   static const String parentParentAuthState = 'lib/src/blocs/parent/parent_auth_state.dart';
+  static const String parentParentCompleteRegistrationResponse = 'lib/src/models/parent/parent_complete_registration_response.dart';
+  static const String parentParentCompleteRegistrationScreen = 'lib/src/ui/screens/parent/parent_complete_registration_screen.dart';
+  static const String parentParentModel = 'lib/src/models/parent/parent_model.dart';
   static const String parentParentRegisterScreen = 'lib/src/ui/screens/parent/parent_register_screen.dart';
   static const String repositoriesBaseRepository = 'lib/src/repositories/base_repository.dart';
   static const String repositoriesParentRepository = 'lib/src/repositories/parent_repository.dart';

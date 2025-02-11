@@ -5,6 +5,7 @@ import 'package:flutter_verification_code_field/flutter_verification_code_field.
 import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
@@ -89,6 +90,12 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
               SnackBar(
                 content: Text(state.message),
                 backgroundColor: Colors.green,
+              ),
+            );
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ParentCompleteRegistrationScreen(),
               ),
             );
           }

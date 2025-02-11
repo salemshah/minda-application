@@ -32,6 +32,19 @@ class ParentResendEmailVerificationRequested extends ParentAuthEvent {
   });
 }
 
+/// event for parent complete registration
+class ParentCompleteRegistrationRequested extends ParentAuthEvent {
+  final String birthDate;
+  final String phoneNumber;
+  final String addressPostal;
+
+  ParentCompleteRegistrationRequested({
+    required this.birthDate,
+    required this.phoneNumber,
+    required this.addressPostal,
+  });
+}
+
 /// Event for parent login.
 class ParentLoginRequested extends ParentAuthEvent {
   final String email;
