@@ -26,6 +26,9 @@ class Assets {
   static const String parentParentAuthState = 'lib/src/blocs/parent/parent_auth_state.dart';
   static const String parentParentCompleteRegistrationResponse = 'lib/src/models/parent/parent_complete_registration_response.dart';
   static const String parentParentCompleteRegistrationScreen = 'lib/src/ui/screens/parent/parent_complete_registration_screen.dart';
+  static const String parentParentDashboardScreen = 'lib/src/ui/screens/parent/parent_dashboard_screen.dart';
+  static const String parentParentLoginResponse = 'lib/src/models/parent/parent_login_response.dart';
+  static const String parentParentLoginScreen = 'lib/src/ui/screens/parent/parent_login_screen.dart';
   static const String parentParentModel = 'lib/src/models/parent/parent_model.dart';
   static const String parentParentRegisterScreen = 'lib/src/ui/screens/parent/parent_register_screen.dart';
   static const String repositoriesBaseRepository = 'lib/src/repositories/base_repository.dart';

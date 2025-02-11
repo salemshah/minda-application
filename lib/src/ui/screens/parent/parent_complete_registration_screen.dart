@@ -7,6 +7,7 @@ import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
 import 'package:minda_application/src/ui/screens/parent/email_verification_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_dashboard_screen.dart';
 import 'package:minda_application/src/ui/widgets/custom_text_field.dart';
 import 'package:minda_application/src/ui/widgets/loading_widget.dart';
 import 'package:intl/intl.dart';
@@ -73,7 +74,7 @@ class _ParentRegisterPageState extends State<ParentCompleteRegistrationScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const EmailVerificationScreen()),
+                    builder: (context) => const ParentDashboardScreen()),
               );
             }
             if (state is ParentCompleteRegistrationFailure) {

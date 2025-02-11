@@ -4,9 +4,9 @@ class ParentModel {
   final String firstName;
   final String lastName;
   final bool status;
-  final DateTime birthDate;
-  final String phoneNumber;
-  final String addressPostal;
+  final DateTime? birthDate;
+  final String? phoneNumber;
+  final String? addressPostal;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -16,9 +16,9 @@ class ParentModel {
     required this.firstName,
     required this.lastName,
     required this.status,
-    required this.birthDate,
-    required this.phoneNumber,
-    required this.addressPostal,
+    this.birthDate,
+    this.phoneNumber,
+    this.addressPostal,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -30,9 +30,9 @@ class ParentModel {
       firstName: json['firstName'] as String,
       lastName: json['lastName'] as String,
       status: json['status'] as bool,
-      birthDate: DateTime.parse(json['birthDate'] as String),
-      phoneNumber: json['phoneNumber'] as String,
-      addressPostal: json['addressPostal'] as String,
+      birthDate: json['birthDate'] != null ? DateTime.tryParse(json['birthDate'] as String) : null,
+      phoneNumber: json['phoneNumber'] as String?, // Safe parsing for nullable String
+      addressPostal: json['addressPostal'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -45,7 +45,7 @@ class ParentModel {
       'firstName': firstName,
       'lastName': lastName,
       'status': status,
-      'birthDate': birthDate.toIso8601String(),
+      'birthDate': birthDate,
       'phoneNumber': phoneNumber,
       'addressPostal': addressPostal,
       'createdAt': createdAt.toIso8601String(),

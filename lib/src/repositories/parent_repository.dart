@@ -1,4 +1,5 @@
 import 'package:minda_application/src/models/parent/parent_complete_registration_response.dart';
+import 'package:minda_application/src/models/parent/parent_login_response.dart';
 import 'base_repository.dart';
 
 class ParentRepository extends BaseRepository {
@@ -25,6 +26,29 @@ class ParentRepository extends BaseRepository {
   }
 
   ///============================================
+  /// Parent login
+  /// ===========================================
+  Future<ParentLoginResponse> parentLogin({
+    required String email,
+    required String password,
+  }) async {
+    final data = {
+      "email": email,
+      "password": password,
+    };
+
+    final response = await apiService.post('/auth/parent-login', data);
+    if (response.containsKey('message') &&
+        response.containsKey('parent') &&
+        response.containsKey('accessToken') &&
+        response.containsKey('refreshToken')) {
+      return ParentLoginResponse.fromJson(response);
+    } else {
+      throw Exception("Unexpected response format");
+    }
+  }
+
+  ///============================================
   /// Parent Complete registration
   /// ===========================================
   Future<ParentCompleteRegistrationResponse> parentCompleteRegistration({
@@ -38,7 +62,8 @@ class ParentRepository extends BaseRepository {
       "addressPostal": addressPostal
     };
 
-    final response = await apiService.post("/parent/complete-registration", data);
+    final response =
+        await apiService.put("/parent/complete-registration", data);
     if (response.containsKey('message') && response.containsKey('parent')) {
       return ParentCompleteRegistrationResponse.fromJson(response);
     } else {
@@ -55,6 +80,7 @@ class ParentRepository extends BaseRepository {
     final response = await apiService.post("/parent/verify-email", data);
     return response['message'];
   }
+
   ///============================================
   /// Parent resend email verification
   /// ===========================================
