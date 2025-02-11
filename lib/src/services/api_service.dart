@@ -1,26 +1,40 @@
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
   final String baseUrl;
   final Map<String, String> defaultHeaders;
+  final FlutterSecureStorage secureStorage;
 
   ApiService({
     required this.baseUrl,
+    required this.secureStorage,
     Map<String, String>? headers,
   }) : defaultHeaders = headers ?? {"Content-Type": "application/json"};
 
+  /// Retrieves headers by merging the default headers with the Authorization header (if available)
+  Future<Map<String, String>> _getHeaders() async {
+    final token = await secureStorage.read(key: 'accessToken');
+    return {
+      ...defaultHeaders,
+      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
+    };
+  }
+
   Future<Map<String, dynamic>> get(String endpoint) async {
     final url = Uri.parse('$baseUrl$endpoint');
-    final response = await http.get(url, headers: defaultHeaders);
+    final headers = await _getHeaders();
+    final response = await http.get(url, headers: headers);
     return _handleResponse(response);
   }
 
   Future<Map<String, dynamic>> post(String endpoint, dynamic data) async {
     final url = Uri.parse('$baseUrl$endpoint');
+    final headers = await _getHeaders();
     final response = await http.post(
       url,
-      headers: defaultHeaders,
+      headers: headers,
       body: jsonEncode(data),
     );
     return _handleResponse(response);
@@ -28,9 +42,10 @@ class ApiService {
 
   Future<Map<String, dynamic>> put(String endpoint, dynamic data) async {
     final url = Uri.parse('$baseUrl$endpoint');
+    final headers = await _getHeaders();
     final response = await http.put(
       url,
-      headers: defaultHeaders,
+      headers: headers,
       body: jsonEncode(data),
     );
     return _handleResponse(response);
@@ -38,7 +53,8 @@ class ApiService {
 
   Future<Map<String, dynamic>> delete(String endpoint) async {
     final url = Uri.parse('$baseUrl$endpoint');
-    final response = await http.delete(url, headers: defaultHeaders);
+    final headers = await _getHeaders();
+    final response = await http.delete(url, headers: headers);
     return _handleResponse(response);
   }
 

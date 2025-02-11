@@ -6,6 +6,7 @@ import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   const EmailVerificationScreen({super.key});
@@ -95,7 +96,7 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const ParentCompleteRegistrationScreen(),
+                builder: (context) => const ParentLoginScreen(),
               ),
             );
           }

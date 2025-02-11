@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // Import screens
 import 'package:minda_application/src/ui/screens/child/game_home_screen.dart';
 import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
 import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart';
 
@@ -37,23 +39,21 @@ class MindaApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Initialize global font settings if needed.
     FontSize(context);
 
-    // Create the ApiService with the base URL.
-    final ApiService apiService =
-        ApiService(baseUrl: "http://localhost:8000/api");
+    final ApiService apiService = ApiService(
+        baseUrl: "http://localhost:8000/api",
+        secureStorage: const FlutterSecureStorage());
 
-    // Create your repository instance. In this case, the ParentRepository.
     final ParentRepository parentRepository =
         ParentRepository(apiService: apiService);
 
     return MultiBlocProvider(
       providers: [
-        // Provide ParentAuthBloc globally. If you have more blocs, add them here.
         BlocProvider<ParentAuthBloc>(
-          create: (context) =>
-              ParentAuthBloc(parentRepository: parentRepository),
+          create: (context) => ParentAuthBloc(
+              parentRepository: parentRepository,
+              secureStorage: const FlutterSecureStorage()),
         ),
       ],
       child: MaterialApp(
@@ -63,7 +63,6 @@ class MindaApp extends StatelessWidget {
             final width = constraints.maxWidth;
             final height = constraints.maxHeight;
 
-            // Dynamically set designSize based on the current screen size
             final dynamicDesignSize = Size(width, height);
 
             return ScreenUtilInit(
@@ -71,8 +70,9 @@ class MindaApp extends StatelessWidget {
               minTextAdapt: true,
               splitScreenMode: true,
               builder: (context, child) {
+                return const ParentLoginScreen();
                 // return const ParentCompleteRegistrationScreen();
-                return const SelectRoleScreen();
+                // return const SelectRoleScreen();
               },
             );
           },
@@ -88,13 +88,11 @@ class MindaApp extends StatelessWidget {
   }
 }
 
-// Example of a ParentsScreen widget (portrait by default)
 class ParentsScreen extends StatelessWidget {
   const ParentsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Use ScreenUtil for responsive sizing
     return Scaffold(
       appBar: AppBar(
         title: const Text('Parents Screen'),
