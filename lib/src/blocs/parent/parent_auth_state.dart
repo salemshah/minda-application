@@ -1,4 +1,4 @@
-import '../../models/parent_model.dart';
+import '../../models/parent/parent_model.dart';
 
 abstract class ParentAuthState {}
 
@@ -61,4 +61,20 @@ class ParentLoginFailure extends ParentAuthState {
   final ParentModel message;
 
   ParentLoginFailure({required this.message});
+}
+
+/// State used when parent login succeeds and you want to pass a ParentModel.
+class ParentCompleteRegistrationSuccess extends ParentAuthState {
+  final ParentModel parent;
+  final String message;
+
+  ParentCompleteRegistrationSuccess(
+      {required this.parent, required this.message});
+}
+
+/// State used when parent login succeeds and you want to pass a ParentModel.
+class ParentCompleteRegistrationFailure extends ParentAuthState {
+  final String error;
+
+  ParentCompleteRegistrationFailure({required this.error});
 }

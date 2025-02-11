@@ -1,11 +1,12 @@
+import 'package:minda_application/src/models/parent/parent_complete_registration_response.dart';
 import 'base_repository.dart';
 
 class ParentRepository extends BaseRepository {
   ParentRepository({required super.apiService});
 
-  /// Registers a parent using the reusable API service.
-  ///
-  /// Throws an Exception if the call fails.
+  ///============================================
+  /// Parent registration
+  /// ===========================================
   Future<String> registerParent({
     required String email,
     required String firstName,
@@ -19,21 +20,48 @@ class ParentRepository extends BaseRepository {
       "password": password,
     };
 
-    // Using the reusable POST method.
     final response = await apiService.post('/auth/parent-register', data);
     return response['message'];
   }
 
+  ///============================================
+  /// Parent Complete registration
+  /// ===========================================
+  Future<ParentCompleteRegistrationResponse> parentCompleteRegistration({
+    required String birthDate,
+    required String phoneNumber,
+    required String addressPostal,
+  }) async {
+    final data = {
+      "birthDate": birthDate,
+      "phoneNumber": phoneNumber,
+      "addressPostal": addressPostal
+    };
+
+    final response = await apiService.post("/parent/complete-registration", data);
+    if (response.containsKey('message') && response.containsKey('parent')) {
+      return ParentCompleteRegistrationResponse.fromJson(response);
+    } else {
+      throw Exception("Unexpected response format");
+    }
+  }
+
+  ///============================================
+  /// Parent email verification
+  /// ===========================================
   Future<String> parentEmailVerification({required String code}) async {
     final data = {"code": code};
 
     final response = await apiService.post("/parent/verify-email", data);
     return response['message'];
   }
-
+  ///============================================
+  /// Parent resend email verification
+  /// ===========================================
   Future<String> parentResendEmailVerification({required String email}) async {
     final data = {"email": email};
-    final response = await apiService.post("/parent/resend-verification-email", data);
+    final response =
+        await apiService.post("/parent/resend-verification-email", data);
     return response['message'];
   }
 }
