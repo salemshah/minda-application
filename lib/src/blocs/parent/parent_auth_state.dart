@@ -5,6 +5,10 @@ abstract class ParentAuthState {}
 class ParentAuthInitial extends ParentAuthState {}
 
 class ParentAuthLoading extends ParentAuthState {}
+
+class AuthAuthenticated extends ParentAuthState {}
+class AuthUnauthenticated extends ParentAuthState {}
+
 ///==================================================================
 /// State used when the parent registration succeeds
 /// =================================================================
@@ -66,7 +70,7 @@ class ParentLoginSuccess extends ParentAuthState {
   ParentLoginSuccess({required this.parent, required this.message, required this.accessToken, required this.refreshToken});
 }
 ///==================================================================
-/// State used when parent login succeeds
+/// State used when parent login failure
 ///==================================================================
 class ParentLoginFailure extends ParentAuthState {
   final String error;
@@ -83,11 +87,28 @@ class ParentCompleteRegistrationSuccess extends ParentAuthState {
   ParentCompleteRegistrationSuccess(
       {required this.parent, required this.message});
 }
+
 ///==================================================================
-/// State used when parent complete registration succeeds
+/// State used when parent complete registration failure
 ///==================================================================
 class ParentCompleteRegistrationFailure extends ParentAuthState {
   final String error;
-
   ParentCompleteRegistrationFailure({required this.error});
+}
+
+///==================================================================
+/// State used when parent logout succeeds
+///==================================================================
+class ParentLogoutSuccess extends ParentAuthState {
+  final String message;
+  ParentLogoutSuccess({required this.message});
+}
+
+
+///==================================================================
+/// State used when parent logout failure failure
+///==================================================================
+class ParentLogoutFailure extends ParentAuthState {
+  final String error;
+  ParentLogoutFailure({required this.error});
 }

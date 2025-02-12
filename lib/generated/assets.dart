@@ -39,6 +39,7 @@ class Assets {
   static const String srirachaSrirachaRegular = 'assets/fonts/Sriracha/Sriracha-Regular.ttf';
   static const String utilsButtonSize = 'lib/src/utils/button_size.dart';
   static const String utilsFontSize = 'lib/src/utils/font_size.dart';
+  static const String utilsJwt = 'lib/src/utils/jwt.dart';
   static const String welcomeSelectRoleScreen = 'lib/src/ui/screens/welcome/select_role_screen.dart';
   static const String widgetsCustomTextField = 'lib/src/ui/widgets/custom_text_field.dart';
   static const String widgetsLabeledTextFormField = 'lib/src/ui/widgets/labeled_text_form_field.dart';

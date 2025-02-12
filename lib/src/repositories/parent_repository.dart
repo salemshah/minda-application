@@ -90,4 +90,13 @@ class ParentRepository extends BaseRepository {
         await apiService.post("/parent/resend-verification-email", data);
     return response['message'];
   }
+
+  ///============================================
+  /// Parent logout
+  /// ===========================================
+  Future<String> parentLogout() async {
+    final response = await apiService.post("/auth/logout",{});
+    return response['message'];
+  }
+
 }

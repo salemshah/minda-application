@@ -6,17 +6,18 @@ import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
 import 'package:minda_application/src/ui/screens/parent/email_verification_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 import 'package:minda_application/src/ui/widgets/custom_text_field.dart';
 import 'package:minda_application/src/ui/widgets/loading_widget.dart';
 
-class ParentRegisterPage extends StatefulWidget {
-  const ParentRegisterPage({super.key});
+class ParentRegisterScreen extends StatefulWidget {
+  const ParentRegisterScreen({super.key});
 
   @override
-  _ParentRegisterPageState createState() => _ParentRegisterPageState();
+  _ParentRegisterScreenState createState() => _ParentRegisterScreenState();
 }
 
-class _ParentRegisterPageState extends State<ParentRegisterPage> {
+class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController =
@@ -134,6 +135,27 @@ class _ParentRegisterPageState extends State<ParentRegisterPage> {
                             onPressed: _onRegisterButtonPressed,
                             child: const Text("Register"),
                           ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ParentLoginScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'I already have an account',
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration
+                                .underline, // to indicate it's clickable
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

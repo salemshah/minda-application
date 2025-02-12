@@ -8,6 +8,7 @@ import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
 import 'package:minda_application/src/ui/screens/parent/email_verification_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_dashboard_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
 import 'package:minda_application/src/ui/widgets/custom_text_field.dart';
 import 'package:minda_application/src/ui/widgets/loading_widget.dart';
 
@@ -112,10 +113,12 @@ class _ParentLoginPageState extends State<ParentLoginScreen> {
                       label: "Password",
                       obscureText: true,
                       validator: (value) {
-                        if (value == null || value.isEmpty)
+                        if (value == null || value.isEmpty) {
                           return "Please enter password";
-                        if (value.length < 6)
+                        }
+                        if (value.length < 6) {
                           return "Password must be at least 6 characters";
+                        }
                         return null;
                       },
                     ),
@@ -126,6 +129,27 @@ class _ParentLoginPageState extends State<ParentLoginScreen> {
                             onPressed: _onLoginButtonPressed,
                             child: const Text("Login"),
                           ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ParentRegisterScreen(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "I don't have an account",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            decoration: TextDecoration
+                                .underline, // to indicate it's clickable
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),

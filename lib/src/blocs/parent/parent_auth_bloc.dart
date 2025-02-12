@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:minda_application/src/repositories/parent_repository.dart';
 import 'parent_auth_event.dart';
 import 'parent_auth_state.dart';
@@ -10,11 +11,26 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
 
   ParentAuthBloc({required this.parentRepository, required this.secureStorage})
       : super(ParentAuthInitial()) {
+    on<CheckParentTokenExpiration>(_onCheckParentTokenExpiration);
     on<ParentRegisterRequested>(_onRegisterRequested);
     on<ParentEmailVerificationRequested>(_parentEmailVerification);
     on<ParentResendEmailVerificationRequested>(_parentResendEmailVerification);
     on<ParentCompleteRegistrationRequested>(_parentCompleteRegistration);
     on<ParentLoginRequested>(_parentLogin);
+    on<ParentLogoutRequested>(_parentLogout);
+  }
+
+  ///======================================================
+  /// Handles the CheckParentTokenExpiration event.
+  /// =====================================================
+  Future<void> _onCheckParentTokenExpiration(
+      CheckParentTokenExpiration event, Emitter<ParentAuthState> emit) async {
+    final token = await secureStorage.read(key: 'accessToken');
+    if (token != null && !JwtDecoder.isExpired(token)) {
+      emit(AuthAuthenticated());
+    } else {
+      emit(AuthUnauthenticated());
+    }
   }
 
   ///======================================================
@@ -96,8 +112,8 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
   ///======================================================
   /// handle ParentLoginRequested event
   /// =====================================================
-  Future<void> _parentLogin(ParentLoginRequested event, Emitter<ParentAuthState> emit) async {
-
+  Future<void> _parentLogin(
+      ParentLoginRequested event, Emitter<ParentAuthState> emit) async {
     emit(ParentAuthLoading());
     try {
       final parentLoginResponse = await parentRepository.parentLogin(
@@ -118,6 +134,22 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       ));
     } catch (e) {
       emit(ParentLoginFailure(error: e.toString()));
+    }
+  }
+
+  ///======================================================
+  /// handle ParentLogoutRequested event
+  /// =====================================================
+  Future<void> _parentLogout(
+      ParentLogoutRequested event, Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+    try {
+      final response = await parentRepository.parentLogout();
+      await secureStorage.delete(key: 'accessToken');
+      emit(AuthUnauthenticated());
+      emit(ParentLogoutSuccess(message: response));
+    } catch (e) {
+      emit(ParentLogoutFailure(error: e.toString()));
     }
   }
 }

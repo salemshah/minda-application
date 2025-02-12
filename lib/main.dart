@@ -23,7 +23,6 @@ import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  // Allow both portrait and landscape globally.
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -70,16 +69,16 @@ class MindaApp extends StatelessWidget {
               minTextAdapt: true,
               splitScreenMode: true,
               builder: (context, child) {
-                return const ParentLoginScreen();
+                // return const ParentLoginScreen();
                 // return const ParentCompleteRegistrationScreen();
-                // return const SelectRoleScreen();
+                return const SelectRoleScreen();
               },
             );
           },
         ),
         routes: {
           '/parents': (context) => const ParentsScreen(),
-          '/parent_register_screen': (context) => const ParentRegisterPage(),
+          '/parent_register_screen': (context) => const ParentRegisterScreen(),
           '/child': (context) => const LoginChildScreen(),
           '/home': (context) => const GameHomeScreen(),
         },
