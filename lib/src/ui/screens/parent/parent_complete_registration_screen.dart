@@ -16,10 +16,10 @@ class ParentCompleteRegistrationScreen extends StatefulWidget {
   const ParentCompleteRegistrationScreen({super.key});
 
   @override
-  _ParentRegisterPageState createState() => _ParentRegisterPageState();
+  _ParentRegisterScreenState createState() => _ParentRegisterScreenState();
 }
 
-class _ParentRegisterPageState extends State<ParentCompleteRegistrationScreen> {
+class _ParentRegisterScreenState extends State<ParentCompleteRegistrationScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _birthDate =

@@ -1,5 +1,6 @@
 /// Base class for parent authentication events.
 abstract class ParentAuthEvent {}
+class CheckParentTokenExpiration extends ParentAuthEvent {}
 
 /// Event for parent registration.
 class ParentRegisterRequested extends ParentAuthEvent {
@@ -54,4 +55,8 @@ class ParentLoginRequested extends ParentAuthEvent {
     required this.email,
     required this.password,
   });
+}
+
+class ParentLogoutRequested extends ParentAuthEvent {
+  ParentLogoutRequested();
 }
