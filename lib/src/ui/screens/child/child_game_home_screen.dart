@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
-import 'package:minda_application/src/ui/screens/child/shop_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_shop_screen.dart';
 import 'package:minda_application/src/ui/widgets/rive_animated_button.dart';
 
-class GameHomeScreen extends StatefulWidget {
-  const GameHomeScreen({super.key});
+import '../../../config/routes.dart';
+
+class ChildGameHomeScreen extends StatefulWidget {
+  const ChildGameHomeScreen({super.key});
 
   @override
-  State<GameHomeScreen> createState() => _GameHomeScreen();
+  State<ChildGameHomeScreen> createState() => _ChildGameHomeScreen();
 }
 
-class _GameHomeScreen extends State<GameHomeScreen> {
+class _ChildGameHomeScreen extends State<ChildGameHomeScreen> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -204,21 +206,21 @@ class LandscapeMode extends StatelessWidget {
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 1,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    routeName: Routes.childLoginScreen,
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 2,
-                    onTapNavigateTo: (context) => ShopScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 3,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                 ],
               ),
@@ -243,21 +245,21 @@ class LandscapeMode extends StatelessWidget {
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 1,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 2,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 3,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                 ],
               ),

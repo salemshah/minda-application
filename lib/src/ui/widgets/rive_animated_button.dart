@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
 import 'package:rive/rive.dart';
 
 class RiveAnimatedButton extends StatelessWidget {
@@ -10,14 +10,14 @@ class RiveAnimatedButton extends StatelessWidget {
   final double conditionValue;
   final Alignment alignment;
   final BoxFit fit;
-  final WidgetBuilder onTapNavigateTo;
+  final String routeName;
 
   const RiveAnimatedButton({
     super.key,
     required this.height,
     required this.width,
     required this.conditionValue,
-    required this.onTapNavigateTo,
+    required this.routeName,
     this.assetPath = 'assets/rive_files/buttons.riv',
     this.stateMachineName = 'button_sm',
     this.alignment = Alignment.centerLeft,
@@ -31,7 +31,7 @@ class RiveAnimatedButton extends StatelessWidget {
       width: width,
       child: GestureDetector(
         onTapUp: (detail) {
-          Navigator.push(context, MaterialPageRoute(builder: onTapNavigateTo));
+          Navigator.pushNamed(context, routeName);
         },
         child: RiveAnimation.asset(
           assetPath,

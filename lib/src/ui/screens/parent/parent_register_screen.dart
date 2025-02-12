@@ -5,10 +5,12 @@ import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
-import 'package:minda_application/src/ui/screens/parent/email_verification_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_email_verification_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 import 'package:minda_application/src/ui/widgets/custom_text_field.dart';
 import 'package:minda_application/src/ui/widgets/loading_widget.dart';
+
+import '../../../config/routes.dart';
 
 class ParentRegisterScreen extends StatefulWidget {
   const ParentRegisterScreen({super.key});
@@ -69,10 +71,10 @@ class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
                   backgroundColor: Colors.green,
                 ),
               );
-              Navigator.push(
+              Navigator.pushNamedAndRemoveUntil(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const EmailVerificationScreen()),
+                Routes.parentEmailVerificationScreen,
+                (route) => false,
               );
             }
             if (state is ParentRegistrationFailure) {
@@ -139,11 +141,9 @@ class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
                     Center(
                       child: GestureDetector(
                         onTap: () {
-                          Navigator.push(
+                          Navigator.pushNamed(
                             context,
-                            MaterialPageRoute(
-                              builder: (context) => const ParentLoginScreen(),
-                            ),
+                            Routes.parentLoginScreen,
                           );
                         },
                         child: Text(

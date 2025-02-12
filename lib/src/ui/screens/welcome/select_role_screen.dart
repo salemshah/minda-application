@@ -5,9 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
-import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
-import 'package:minda_application/src/ui/screens/parent/parent_dashboard_screen.dart';
-import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
+import 'package:minda_application/src/config/routes.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 
 class SelectRoleScreen extends StatelessWidget {
@@ -25,18 +24,16 @@ class SelectRoleScreen extends StatelessWidget {
       child: BlocListener<ParentAuthBloc, ParentAuthState>(
         listener: (context, state) {
           if (state is AuthUnauthenticated) {
-            Navigator.pushReplacement(
+            Navigator.pushNamedAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                builder: (context) => const ParentRegisterScreen(),
-              ),
+              Routes.parentLoginScreen,
+              (route) => false,
             );
           } else if (state is AuthAuthenticated) {
-            Navigator.pushReplacement(
+            Navigator.pushNamedAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                builder: (context) => const ParentDashboardScreen(),
-              ),
+              Routes.parentDashboardScreen,
+              (route) => false,
             );
           }
         },
@@ -101,7 +98,7 @@ class SelectRoleScreen extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const LoginChildScreen(),
+                                builder: (context) => const ChildLoginScreen(),
                               ),
                             );
                           },

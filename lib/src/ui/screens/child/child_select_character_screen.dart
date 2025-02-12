@@ -1,17 +1,19 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:minda_application/src/ui/screens/child/game_home_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_game_home_screen.dart';
 
-class CharacterSelectionScreen extends StatefulWidget {
-  const CharacterSelectionScreen({super.key});
+import '../../../config/routes.dart';
+
+class ChildSelectCharacterScreen extends StatefulWidget {
+  const ChildSelectCharacterScreen({super.key});
 
   @override
-  State<CharacterSelectionScreen> createState() =>
-      _CharacterSelectionScreenState();
+  State<ChildSelectCharacterScreen> createState() =>
+      _ChildSelectCharacterScreenState();
 }
 
-class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
+class _ChildSelectCharacterScreenState extends State<ChildSelectCharacterScreen> {
   final List<Map<String, dynamic>> characters = [
     {
       'id': 1,
@@ -123,11 +125,11 @@ class _CharacterSelectionScreenState extends State<CharacterSelectionScreen> {
                                   setState(() {
                                     selectedCharacterIndex = index;
                                   });
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              GameHomeScreen()));
+                                  Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    Routes.childGameHomeScreen,
+                                        (route) => false,
+                                  );
                                 }
                               },
                             );

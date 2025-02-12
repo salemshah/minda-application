@@ -6,11 +6,13 @@ import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
-import 'package:minda_application/src/ui/screens/parent/email_verification_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_email_verification_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_dashboard_screen.dart';
 import 'package:minda_application/src/ui/widgets/custom_text_field.dart';
 import 'package:minda_application/src/ui/widgets/loading_widget.dart';
 import 'package:intl/intl.dart';
+
+import '../../../config/routes.dart';
 
 class ParentCompleteRegistrationScreen extends StatefulWidget {
   const ParentCompleteRegistrationScreen({super.key});
@@ -71,10 +73,10 @@ class _ParentRegisterScreenState extends State<ParentCompleteRegistrationScreen>
                   backgroundColor: Colors.green,
                 ),
               );
-              Navigator.push(
+              Navigator.pushNamedAndRemoveUntil(
                 context,
-                MaterialPageRoute(
-                    builder: (context) => const ParentDashboardScreen()),
+                Routes.parentDashboardScreen,
+                    (route) => false,
               );
             }
             if (state is ParentCompleteRegistrationFailure) {

@@ -18,7 +18,7 @@ dependencies:
   flutter_screenutil: ^5.9.3
   tutorial_coach_mark: ^1.2.12
   shared_preferences: ^2.3.3
-  rive: ^0.13.18
+  rive: ^0.13.20
   device_info_plus: ^11.1.1
   flutter_verification_code_field: ^1.0.9
   date_input_form_field: ^1.2.0
