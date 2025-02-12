@@ -8,15 +8,18 @@ import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 
-class EmailVerificationScreen extends StatefulWidget {
-  const EmailVerificationScreen({super.key});
+import '../../../config/routes.dart';
+
+class ParentEmailVerificationScreen extends StatefulWidget {
+  const ParentEmailVerificationScreen({super.key});
 
   @override
-  State<EmailVerificationScreen> createState() =>
-      _EmailVerificationScreenState();
+  State<ParentEmailVerificationScreen> createState() =>
+      _ParentEmailVerificationScreenState();
 }
 
-class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
+class _ParentEmailVerificationScreenState
+    extends State<ParentEmailVerificationScreen> {
   String _code = '';
   bool _isFilled = false;
 
@@ -93,11 +96,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
                 backgroundColor: Colors.green,
               ),
             );
-            Navigator.push(
+            Navigator.pushNamedAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                builder: (context) => const ParentLoginScreen(),
-              ),
+              Routes.parentLoginScreen,
+              (route) => false,
             );
           }
           if (state is ParentEmailVerificationFailure) {

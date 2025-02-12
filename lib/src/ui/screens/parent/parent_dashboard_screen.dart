@@ -8,6 +8,7 @@ import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart
 
 import '../../../blocs/parent/parent_auth_event.dart';
 import '../../../blocs/parent/parent_auth_state.dart';
+import '../../../config/routes.dart';
 import '../../common/orientation_wrapper.dart';
 
 class ParentDashboardScreen extends StatefulWidget {
@@ -32,16 +33,12 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
       ],
       child: BlocListener<ParentAuthBloc, ParentAuthState>(
         listener: (context, state) {
-          print("Auth");
           if (state is AuthUnauthenticated) {
-            print("Not auth");
 
-            Navigator.pushAndRemoveUntil(
+            Navigator.pushNamedAndRemoveUntil(
               context,
-              MaterialPageRoute(
-                builder: (context) => const ParentLoginScreen(),
-              ),
-              (route) => false,
+              Routes.parentLoginScreen,
+                  (route) => false,
             );
           }
         },

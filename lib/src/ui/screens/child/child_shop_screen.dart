@@ -1,17 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
+import 'package:minda_application/src/config/routes.dart';
+import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
 import 'package:minda_application/src/ui/widgets/rive_animated_button.dart';
 
-class ShopScreen extends StatefulWidget {
-  const ShopScreen({super.key});
+class ChildShopScreen extends StatefulWidget {
+  const ChildShopScreen({super.key});
 
   @override
-  State<ShopScreen> createState() => _GameHomeScreen();
+  State<ChildShopScreen> createState() => _ChildGameHomeScreen();
 }
 
-class _GameHomeScreen extends State<ShopScreen> {
+class _ChildGameHomeScreen extends State<ChildShopScreen> {
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
@@ -169,21 +170,21 @@ class PortraitMode extends StatelessWidget {
                     height: mainSize * 0.1,
                     width: mainSize * 0.2,
                     conditionValue: 1,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    onTapNavigateTo: (context) => ChildLoginScreen(),
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: mainSize * 0.2,
                     conditionValue: 2,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    onTapNavigateTo: (context) => ChildLoginScreen(),
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: mainSize * 0.2,
                     conditionValue: 3,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    onTapNavigateTo: (context) => ChildLoginScreen(),
                   ),
                 ],
               ),
@@ -208,21 +209,21 @@ class PortraitMode extends StatelessWidget {
                     height: mainSize * 0.1,
                     width: mainSize * 0.2,
                     conditionValue: 1,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    onTapNavigateTo: (context) => ChildLoginScreen(),
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: mainSize * 0.2,
                     conditionValue: 2,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    onTapNavigateTo: (context) => ChildLoginScreen(),
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: mainSize * 0.2,
                     conditionValue: 3,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    onTapNavigateTo: (context) => ChildLoginScreen(),
                   ),
                 ],
               ),
@@ -331,21 +332,21 @@ class LandscapeMode extends StatelessWidget {
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 1,
-                    onTapNavigateTo: (context) => ShopScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 2,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                   SizedBox(height: mainSize * 0.02),
                   RiveAnimatedButton(
                     height: mainSize * 0.10,
                     width: width * 0.15,
                     conditionValue: 3,
-                    onTapNavigateTo: (context) => LoginChildScreen(),
+                    routeName: Routes.childShopScreen,
                   ),
                 ],
               ),

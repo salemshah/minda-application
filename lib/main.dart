@@ -3,10 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:minda_application/src/config/routes.dart';
 
 // Import screens
-import 'package:minda_application/src/ui/screens/child/game_home_screen.dart';
-import 'package:minda_application/src/ui/screens/child/login_child_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_game_home_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_select_character_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_shop_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_dashboard_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_email_verification_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
@@ -77,30 +82,21 @@ class MindaApp extends StatelessWidget {
           },
         ),
         routes: {
-          '/parents': (context) => const ParentsScreen(),
-          '/parent_register_screen': (context) => const ParentRegisterScreen(),
-          '/child': (context) => const LoginChildScreen(),
-          '/home': (context) => const GameHomeScreen(),
+          Routes.parentLoginScreen: (context) => ParentLoginScreen(),
+          Routes.parentRegisterScreen: (context) => ParentRegisterScreen(),
+          Routes.parentEmailVerificationScreen: (context) =>
+              ParentEmailVerificationScreen(),
+          Routes.parentCompleteRegistrationScreen: (context) =>
+              ParentCompleteRegistrationScreen(),
+          Routes.parentDashboardScreen: (context) => ParentDashboardScreen(),
+
+          // child screens
+          Routes.childLoginScreen: (context) => ChildLoginScreen(),
+          Routes.childGameHomeScreen: (context) => ChildGameHomeScreen(),
+          Routes.childShopScreen: (context) => ChildShopScreen(),
+          Routes.childSelectCharacterScreen: (context) =>
+              ChildSelectCharacterScreen(),
         },
-      ),
-    );
-  }
-}
-
-class ParentsScreen extends StatelessWidget {
-  const ParentsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Parents Screen'),
-      ),
-      body: Center(
-        child: Text(
-          'Parents Screen Content',
-          style: TextStyle(fontSize: 24.sp), // Responsive text size
-        ),
       ),
     );
   }

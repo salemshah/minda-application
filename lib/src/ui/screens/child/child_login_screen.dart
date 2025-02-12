@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
-import 'package:minda_application/src/ui/screens/child/character_select_screen.dart';
+import 'package:minda_application/src/ui/screens/child/child_select_character_screen.dart';
 import 'package:minda_application/src/ui/widgets/labeled_text_form_field.dart';
 
-class LoginChildScreen extends StatelessWidget {
-  const LoginChildScreen({super.key});
+import '../../../config/routes.dart';
+
+class ChildLoginScreen extends StatelessWidget {
+  const ChildLoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -132,8 +134,11 @@ class _AuthFormState extends State<AuthForm> {
       print('Pseudo: ${_usernameController.text}');
       print('Password: ${_passwordController.text}');
 
-      Navigator.push(context,
-          MaterialPageRoute(builder: (context) => CharacterSelectionScreen()));
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        Routes.childSelectCharacterScreen,
+            (route) => false,
+      );
     } else {
       print('Validation failed');
     }
