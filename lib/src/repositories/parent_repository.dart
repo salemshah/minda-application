@@ -1,5 +1,6 @@
 import 'package:minda_application/src/models/parent/parent_complete_registration_response.dart';
 import 'package:minda_application/src/models/parent/parent_login_response.dart';
+import 'package:minda_application/src/models/parent/parent_model.dart';
 import 'base_repository.dart';
 
 class ParentRepository extends BaseRepository {
@@ -62,8 +63,7 @@ class ParentRepository extends BaseRepository {
       "addressPostal": addressPostal
     };
 
-    final response =
-        await apiService.put("/parent/complete-registration", data);
+    final response = await apiService.put("/parent/complete-registration", data);
     if (response.containsKey('message') && response.containsKey('parent')) {
       return ParentCompleteRegistrationResponse.fromJson(response);
     } else {
@@ -87,16 +87,27 @@ class ParentRepository extends BaseRepository {
   Future<String> parentResendEmailVerification({required String email}) async {
     final data = {"email": email};
     final response =
-        await apiService.post("/parent/resend-verification-email", data);
+    await apiService.post("/parent/resend-verification-email", data);
     return response['message'];
+  }
+
+  ///============================================
+  /// Parent get profile
+  /// ===========================================
+  Future<ParentModel> getParentProfile() async {
+    final response = await apiService.get("/parent/profile");
+    if (response.containsKey("parent")) {
+      return ParentModel.fromJson(response["parent"]);
+    } else {
+      throw Exception("Unexpected response format");
+    }
   }
 
   ///============================================
   /// Parent logout
   /// ===========================================
   Future<String> parentLogout() async {
-    final response = await apiService.post("/auth/logout",{});
+    final response = await apiService.post("/auth/logout", {});
     return response['message'];
   }
-
 }

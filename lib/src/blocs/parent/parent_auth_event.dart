@@ -1,5 +1,8 @@
+import 'package:minda_application/src/models/parent/parent_model.dart';
+
 /// Base class for parent authentication events.
 abstract class ParentAuthEvent {}
+
 class CheckParentTokenExpiration extends ParentAuthEvent {}
 
 /// Event for parent registration.
@@ -55,6 +58,10 @@ class ParentLoginRequested extends ParentAuthEvent {
     required this.email,
     required this.password,
   });
+}
+
+class ParentGetProfileRequested extends ParentAuthEvent {
+  ParentGetProfileRequested();
 }
 
 class ParentLogoutRequested extends ParentAuthEvent {

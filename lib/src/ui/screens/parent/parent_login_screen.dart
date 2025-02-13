@@ -13,6 +13,7 @@ import 'package:minda_application/src/ui/widgets/custom_text_field.dart';
 import 'package:minda_application/src/ui/widgets/loading_widget.dart';
 
 import '../../../config/routes.dart';
+import '../../common/navigate_with_oriantation.dart';
 
 class ParentLoginScreen extends StatefulWidget {
   const ParentLoginScreen({super.key});
@@ -49,112 +50,129 @@ class _ParentLoginPageState extends State<ParentLoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return OrientationWrapper(
-      orientations: const [
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.portraitUp,
-      ],
-      child: Scaffold(
-        appBar: AppBar(title: const Text("Parent Registration")),
-        body: BlocConsumer<ParentAuthBloc, ParentAuthState>(
-          listener: (context, state) {
-            if (state is ParentLoginSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.green,
-                ),
-              );
-
-              if (state.parent.birthDate == null ||
-                  state.parent.phoneNumber == null ||
-                  state.parent.addressPostal == null) {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  Routes.parentCompleteRegistrationScreen,
-                  (route) => false,
-                );
-              } else {
-                Navigator.pushNamedAndRemoveUntil(
-                  context,
-                  Routes.parentDashboardScreen,
-                  (route) => false,
-                );
-              }
-            }
-            if (state is ParentLoginFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.error),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    CustomTextField(
-                      controller: _emailController,
-                      label: "Email",
-                      validator: (value) {
-                        if (value == null || value.isEmpty)
-                          return "Please enter email";
-                        if (!value.contains('@'))
-                          return "Please enter a valid email";
-                        return null;
-                      },
-                    ),
-                    CustomTextField(
-                      controller: _passwordController,
-                      label: "Password",
-                      obscureText: true,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Please enter password";
-                        }
-                        if (value.length < 6) {
-                          return "Password must be at least 6 characters";
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(height: 20),
-                    state is ParentAuthLoading
-                        ? const LoadingWidget()
-                        : ElevatedButton(
-                            onPressed: _onLoginButtonPressed,
-                            child: const Text("Login"),
-                          ),
-                    const SizedBox(height: 20),
-                    Center(
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            Routes.parentRegisterScreen,
-                          );
-                        },
-                        child: Text(
-                          "I don't have an account",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            decoration: TextDecoration
-                                .underline, // to indicate it's clickable
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+    return Scaffold(
+      appBar: AppBar(title: const Text("Parent Registration")),
+      body: BlocConsumer<ParentAuthBloc, ParentAuthState>(
+        listener: (context, state) {
+          if (state is ParentLoginSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.green,
               ),
             );
-          },
-        ),
+
+            if (state.parent.birthDate == null ||
+                state.parent.phoneNumber == null ||
+                state.parent.addressPostal == null) {
+              navigateWithOrientation(
+                context: context,
+                orientations: [DeviceOrientation.portraitUp],
+                navigationType: NavigationType.pushNamedAndRemoveUntil,
+                routeName: Routes.parentCompleteRegistrationScreen,
+              );
+
+              // Navigator.pushNamedAndRemoveUntil(
+              //   context,
+              //   Routes.parentCompleteRegistrationScreen,
+              //   (route) => false,
+              // );
+            } else {
+              navigateWithOrientation(
+                context: context,
+                orientations: [DeviceOrientation.portraitUp],
+                navigationType: NavigationType.pushNamedAndRemoveUntil,
+                routeName: Routes.parentDashboardScreen,
+              );
+
+              // Navigator.pushNamedAndRemoveUntil(
+              //   context,
+              //   Routes.parentDashboardScreen,
+              //   (route) => false,
+              // );
+            }
+          }
+          if (state is ParentLoginFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  CustomTextField(
+                    controller: _emailController,
+                    label: "Email",
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter email";
+                      }
+                      if (!value.contains('@')) {
+                        return "Please enter a valid email";
+                      }
+                      return null;
+                    },
+                  ),
+                  CustomTextField(
+                    controller: _passwordController,
+                    label: "Password",
+                    obscureText: true,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please enter password";
+                      }
+                      if (value.length < 6) {
+                        return "Password must be at least 6 characters";
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  state is ParentAuthLoading
+                      ? const LoadingWidget()
+                      : ElevatedButton(
+                          onPressed: _onLoginButtonPressed,
+                          child: const Text("Login"),
+                        ),
+                  const SizedBox(height: 20),
+                  Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        navigateWithOrientation(
+                          context: context,
+                          orientations: [DeviceOrientation.portraitUp],
+                          navigationType:
+                              NavigationType.pushNamedAndRemoveUntil,
+                          routeName: Routes.parentRegisterScreen,
+                        );
+                        // Navigator.pushNamed(
+                        //   context,
+                        //   Routes.parentRegisterScreen,
+                        // );
+                      },
+                      child: Text(
+                        "I don't have an account",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration
+                              .underline, // to indicate it's clickable
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

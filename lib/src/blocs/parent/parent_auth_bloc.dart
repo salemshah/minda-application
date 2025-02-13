@@ -17,6 +17,7 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
     on<ParentResendEmailVerificationRequested>(_parentResendEmailVerification);
     on<ParentCompleteRegistrationRequested>(_parentCompleteRegistration);
     on<ParentLoginRequested>(_parentLogin);
+    on<ParentGetProfileRequested>(_parentGetProfile);
     on<ParentLogoutRequested>(_parentLogout);
   }
 
@@ -134,6 +135,21 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       ));
     } catch (e) {
       emit(ParentLoginFailure(error: e.toString()));
+    }
+  }
+
+  ///======================================================
+  /// handle ParentGetProfileRequested event
+  /// =====================================================
+  Future<void> _parentGetProfile(
+      ParentGetProfileRequested event, Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+    try {
+      final parent = await parentRepository.getParentProfile();
+      emit(ParentGetProfileSuccess(parent: parent));
+    } catch (e) {
+      print(e.toString());
+      emit(ParentGetProfileFailure(error: e.toString()));
     }
   }
 

@@ -13,6 +13,7 @@ import 'package:minda_application/src/ui/widgets/loading_widget.dart';
 import 'package:intl/intl.dart';
 
 import '../../../config/routes.dart';
+import '../../common/navigate_with_oriantation.dart';
 
 class ParentCompleteRegistrationScreen extends StatefulWidget {
   const ParentCompleteRegistrationScreen({super.key});
@@ -57,109 +58,105 @@ class _ParentRegisterScreenState extends State<ParentCompleteRegistrationScreen>
 
   @override
   Widget build(BuildContext context) {
-    return OrientationWrapper(
-      orientations: const [
-        DeviceOrientation.portraitDown,
-        DeviceOrientation.portraitUp,
-      ],
-      child: Scaffold(
-        appBar: AppBar(title: const Text("Parent Registration")),
-        body: BlocConsumer<ParentAuthBloc, ParentAuthState>(
-          listener: (context, state) {
-            if (state is ParentCompleteRegistrationSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Colors.green,
-                ),
-              );
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                Routes.parentDashboardScreen,
-                    (route) => false,
-              );
-            }
-            if (state is ParentCompleteRegistrationFailure) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.error),
-                  backgroundColor: Colors.red,
-                ),
-              );
-            }
-          },
-          builder: (context, state) {
-            return Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Form(
-                key: _formKey,
-                child: ListView(
-                  children: [
-                    DateInputFormField(
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      format: 'dd/MM/yyyy',
-                      controller: _birthDate,
-                      validator: (value) {
-                        final text = value?.$1;
-                        final date = value?.$2;
-                        if (date == null) {
-                          if (text == null || text.isEmpty) {
-                            return 'Please enter a date';
-                          } else if (text.isNotEmpty) {
-                            return 'Please enter a valid date\nFormat: dd/mm/yyyy\nExample: 01/01/2000';
-                          }
-                          return null;
-                        }
-                        if (DateTime.now()
-                            .subtract(const Duration(days: 365 * 18))
-                            .isBefore(date)) {
-                          return 'You must be 18 years old';
-                        } else if (DateTime.now()
-                            .subtract(const Duration(days: 365 * 100))
-                            .isAfter(date)) {
-                          return 'You must be less than 100 years old';
-                        }
-                        return null;
-                      },
-                      onChanged: (value) {
-                        final dateOfBirth = value.$2;
-                        if (dateOfBirth == null) return;
-                        setState(() {
-                          this.dateOfBirth = dateOfBirth;
-                        });
-                      },
-                      decoration: const InputDecoration(
-                        labelText: 'Date of Birth',
-                        border: OutlineInputBorder(),
-                      ),
-                    ),
-                    CustomTextField(
-                      controller: _phoneNumber,
-                      label: "Phone number",
-                      validator: (value) => value == null || value.isEmpty
-                          ? "Please enter phone number"
-                          : null,
-                    ),
-                    CustomTextField(
-                      controller: _addressPostal,
-                      label: "Address postal",
-                      validator: (value) => value == null || value.isEmpty
-                          ? "Please enter address postal"
-                          : null,
-                    ),
-                    const SizedBox(height: 20),
-                    state is ParentAuthLoading
-                        ? const LoadingWidget()
-                        : ElevatedButton(
-                            onPressed: _onRegisterButtonPressed,
-                            child: const Text("Confirmer"),
-                          ),
-                  ],
-                ),
+    return Scaffold(
+      appBar: AppBar(title: const Text("Parent Registration")),
+      body: BlocConsumer<ParentAuthBloc, ParentAuthState>(
+        listener: (context, state) {
+          if (state is ParentCompleteRegistrationSuccess) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.green,
               ),
             );
-          },
-        ),
+
+            navigateWithOrientation(
+              context: context,
+              orientations: [DeviceOrientation.portraitUp],
+              navigationType: NavigationType.pushNamedAndRemoveUntil,
+              routeName: Routes.parentDashboardScreen,
+            );
+          }
+          if (state is ParentCompleteRegistrationFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.error),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: [
+                  DateInputFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    format: 'dd/MM/yyyy',
+                    controller: _birthDate,
+                    validator: (value) {
+                      final text = value?.$1;
+                      final date = value?.$2;
+                      if (date == null) {
+                        if (text == null || text.isEmpty) {
+                          return 'Please enter a date';
+                        } else if (text.isNotEmpty) {
+                          return 'Please enter a valid date\nFormat: dd/mm/yyyy\nExample: 01/01/2000';
+                        }
+                        return null;
+                      }
+                      if (DateTime.now()
+                          .subtract(const Duration(days: 365 * 18))
+                          .isBefore(date)) {
+                        return 'You must be 18 years old';
+                      } else if (DateTime.now()
+                          .subtract(const Duration(days: 365 * 100))
+                          .isAfter(date)) {
+                        return 'You must be less than 100 years old';
+                      }
+                      return null;
+                    },
+                    onChanged: (value) {
+                      final dateOfBirth = value.$2;
+                      if (dateOfBirth == null) return;
+                      setState(() {
+                        this.dateOfBirth = dateOfBirth;
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Date of Birth',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  CustomTextField(
+                    controller: _phoneNumber,
+                    label: "Phone number",
+                    validator: (value) => value == null || value.isEmpty
+                        ? "Please enter phone number"
+                        : null,
+                  ),
+                  CustomTextField(
+                    controller: _addressPostal,
+                    label: "Address postal",
+                    validator: (value) => value == null || value.isEmpty
+                        ? "Please enter address postal"
+                        : null,
+                  ),
+                  const SizedBox(height: 20),
+                  state is ParentAuthLoading
+                      ? const LoadingWidget()
+                      : ElevatedButton(
+                          onPressed: _onRegisterButtonPressed,
+                          child: const Text("Confirmer"),
+                        ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }

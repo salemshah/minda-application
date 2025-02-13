@@ -7,6 +7,7 @@ class ParentAuthInitial extends ParentAuthState {}
 class ParentAuthLoading extends ParentAuthState {}
 
 class AuthAuthenticated extends ParentAuthState {}
+
 class AuthUnauthenticated extends ParentAuthState {}
 
 ///==================================================================
@@ -18,6 +19,7 @@ class ParentRegistrationSuccess extends ParentAuthState {
 
   ParentRegistrationSuccess({required this.message, required this.email});
 }
+
 ///==================================================================
 /// State used when the parent registration failed
 ///==================================================================
@@ -26,6 +28,7 @@ class ParentRegistrationFailure extends ParentAuthState {
 
   ParentRegistrationFailure({required this.error});
 }
+
 ///==================================================================
 /// State used when the resend email verification succeeds
 ///==================================================================
@@ -34,6 +37,7 @@ class ParentResendVerificationSuccess extends ParentAuthState {
 
   ParentResendVerificationSuccess({required this.message});
 }
+
 ///==================================================================
 /// State used when the resend email verification failed
 ///==================================================================
@@ -42,6 +46,7 @@ class ParentResendVerificationFailure extends ParentAuthState {
 
   ParentResendVerificationFailure({required this.message});
 }
+
 ///==================================================================
 /// State used when the email verification succeeds
 ///==================================================================
@@ -50,6 +55,7 @@ class ParentEmailVerificationSuccess extends ParentAuthState {
 
   ParentEmailVerificationSuccess({required this.message});
 }
+
 ///==================================================================
 /// State used when the email verification failed
 ///==================================================================
@@ -58,6 +64,7 @@ class ParentEmailVerificationFailure extends ParentAuthState {
 
   ParentEmailVerificationFailure({required this.error});
 }
+
 ///==================================================================
 /// State used when parent login succeeds
 ///==================================================================
@@ -67,8 +74,13 @@ class ParentLoginSuccess extends ParentAuthState {
   final String refreshToken;
   final String message;
 
-  ParentLoginSuccess({required this.parent, required this.message, required this.accessToken, required this.refreshToken});
+  ParentLoginSuccess(
+      {required this.parent,
+      required this.message,
+      required this.accessToken,
+      required this.refreshToken});
 }
+
 ///==================================================================
 /// State used when parent login failure
 ///==================================================================
@@ -77,6 +89,7 @@ class ParentLoginFailure extends ParentAuthState {
 
   ParentLoginFailure({required this.error});
 }
+
 ///==================================================================
 /// State used when parent complete succeeds
 ///==================================================================
@@ -93,6 +106,7 @@ class ParentCompleteRegistrationSuccess extends ParentAuthState {
 ///==================================================================
 class ParentCompleteRegistrationFailure extends ParentAuthState {
   final String error;
+
   ParentCompleteRegistrationFailure({required this.error});
 }
 
@@ -101,14 +115,33 @@ class ParentCompleteRegistrationFailure extends ParentAuthState {
 ///==================================================================
 class ParentLogoutSuccess extends ParentAuthState {
   final String message;
+
   ParentLogoutSuccess({required this.message});
 }
 
+///==================================================================
+/// State used when get profile succeeds
+///==================================================================
+class ParentGetProfileSuccess extends ParentAuthState {
+  final ParentModel parent;
+
+  ParentGetProfileSuccess({required this.parent});
+}
+
+///==================================================================
+/// State used when get profile failure
+///==================================================================
+class ParentGetProfileFailure extends ParentAuthState {
+  final String error;
+
+  ParentGetProfileFailure({required this.error});
+}
 
 ///==================================================================
 /// State used when parent logout failure failure
 ///==================================================================
 class ParentLogoutFailure extends ParentAuthState {
   final String error;
+
   ParentLogoutFailure({required this.error});
 }
