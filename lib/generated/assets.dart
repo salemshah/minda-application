@@ -10,6 +10,8 @@ class Assets {
   static const String childChildSelectCharacterScreen = 'lib/src/ui/screens/child/child_select_character_screen.dart';
   static const String childChildShopScreen = 'lib/src/ui/screens/child/child_shop_screen.dart';
   static const String childModalCenter = 'lib/src/ui/screens/child/modal_center.dart';
+  static const String commonNavigateWithOriantation = 'lib/src/ui/common/navigate_with_oriantation.dart';
+  static const String commonOrientationHandler = 'lib/src/ui/common/orientation_handler.dart';
   static const String commonOrientationWrapper = 'lib/src/ui/common/orientation_wrapper.dart';
   static const String configRoutes = 'lib/src/config/routes.dart';
   static const String customThemesTextThem = 'lib/src/utils/themes/custom_themes/text_them.dart';
@@ -32,6 +34,7 @@ class Assets {
   static const String parentParentLoginScreen = 'lib/src/ui/screens/parent/parent_login_screen.dart';
   static const String parentParentModel = 'lib/src/models/parent/parent_model.dart';
   static const String parentParentRegisterScreen = 'lib/src/ui/screens/parent/parent_register_screen.dart';
+  static const String parentParentWelcomeScreen = 'lib/src/ui/screens/parent/parent_welcome_screen.dart';
   static const String repositoriesBaseRepository = 'lib/src/repositories/base_repository.dart';
   static const String repositoriesParentRepository = 'lib/src/repositories/parent_repository.dart';
   static const String riveFilesButton = 'assets/rive_files/button.riv';

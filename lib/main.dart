@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:minda_application/src/config/routes.dart';
+import 'package:minda_application/src/ui/common/orientation_handler.dart';
 
 // Import screens
 import 'package:minda_application/src/ui/screens/child/child_game_home_screen.dart';
@@ -19,7 +20,6 @@ import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart
 
 // Import utils and themes
 import 'package:minda_application/src/utils/font_size.dart';
-import 'package:minda_application/src/utils/themes/custom_themes/text_them.dart';
 
 // Import ApiService, repository, and bloc
 import 'package:minda_application/src/services/api_service.dart';
@@ -28,18 +28,13 @@ import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
-  ]).then((_) {
-    runApp(const MindaApp());
-  });
+  runApp(MindaApp());
 }
 
 class MindaApp extends StatelessWidget {
-  const MindaApp({super.key});
+  final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
+
+  MindaApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +57,7 @@ class MindaApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
+        navigatorObservers: [routeObserver],
         home: LayoutBuilder(
           builder: (context, constraints) {
             final width = constraints.maxWidth;
@@ -82,20 +78,67 @@ class MindaApp extends StatelessWidget {
           },
         ),
         routes: {
-          Routes.parentLoginScreen: (context) => ParentLoginScreen(),
-          Routes.parentRegisterScreen: (context) => ParentRegisterScreen(),
-          Routes.parentEmailVerificationScreen: (context) =>
-              ParentEmailVerificationScreen(),
+          /// ============================== Parent Screens ===================================
+          Routes.parentLoginScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentLoginScreen(),
+              ),
+          Routes.parentRegisterScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentRegisterScreen(),
+              ),
+          Routes.parentEmailVerificationScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentEmailVerificationScreen(),
+              ),
           Routes.parentCompleteRegistrationScreen: (context) =>
-              ParentCompleteRegistrationScreen(),
-          Routes.parentDashboardScreen: (context) => ParentDashboardScreen(),
+              OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentCompleteRegistrationScreen(),
+              ),
+          Routes.parentDashboardScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentDashboardScreen(),
+              ),
 
-          // child screens
-          Routes.childLoginScreen: (context) => ChildLoginScreen(),
-          Routes.childGameHomeScreen: (context) => ChildGameHomeScreen(),
-          Routes.childShopScreen: (context) => ChildShopScreen(),
-          Routes.childSelectCharacterScreen: (context) =>
-              ChildSelectCharacterScreen(),
+          /// ============================== Child Screens ===================================
+          Routes.childLoginScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ],
+                child: ChildLoginScreen(),
+              ),
+          Routes.childGameHomeScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ],
+                child: ChildGameHomeScreen(),
+              ),
+          Routes.childShopScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ],
+                child: ChildShopScreen(),
+              ),
+          Routes.childSelectCharacterScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ],
+                child: ChildSelectCharacterScreen(),
+              ),
         },
       ),
     );

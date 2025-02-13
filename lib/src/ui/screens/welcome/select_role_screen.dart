@@ -9,6 +9,8 @@ import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
 import 'package:minda_application/src/config/routes.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 
+import '../../common/navigate_with_oriantation.dart';
+
 class SelectRoleScreen extends StatelessWidget {
   const SelectRoleScreen({super.key});
 
@@ -24,17 +26,33 @@ class SelectRoleScreen extends StatelessWidget {
       child: BlocListener<ParentAuthBloc, ParentAuthState>(
         listener: (context, state) {
           if (state is AuthUnauthenticated) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              Routes.parentLoginScreen,
-              (route) => false,
+
+            navigateWithOrientation(
+              context: context,
+              orientations: [DeviceOrientation.portraitUp],
+              navigationType: NavigationType.pushNamedAndRemoveUntil,
+              routeName: Routes.parentLoginScreen,
             );
+
+            // Navigator.pushNamedAndRemoveUntil(
+            //   context,
+            //   Routes.parentLoginScreen,
+            //   (route) => false,
+            // );
           } else if (state is AuthAuthenticated) {
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              Routes.parentDashboardScreen,
-              (route) => false,
+
+            navigateWithOrientation(
+              context: context,
+              orientations: [DeviceOrientation.portraitUp],
+              navigationType: NavigationType.pushNamedAndRemoveUntil,
+              routeName: Routes.parentDashboardScreen,
             );
+
+            // Navigator.pushNamedAndRemoveUntil(
+            //   context,
+            //   Routes.parentDashboardScreen,
+            //   (route) => false,
+            // );
           }
         },
         child: LayoutBuilder(
@@ -95,12 +113,23 @@ class SelectRoleScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ChildLoginScreen(),
-                              ),
+
+                            navigateWithOrientation(
+                              context: context,
+                              orientations: [
+                                DeviceOrientation.landscapeLeft,
+                                DeviceOrientation.landscapeRight,
+                              ],
+                              navigationType: NavigationType.pushNamedAndRemoveUntil,
+                              routeName: Routes.childLoginScreen,
                             );
+
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (context) => const ChildLoginScreen(),
+                            //   ),
+                            // );
                           },
                           child: Text(
                             'ENFANTS',
