@@ -5,8 +5,6 @@ import 'package:flutter_verification_code_field/flutter_verification_code_field.
 import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
-import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
-import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 
 import '../../../config/routes.dart';
 
@@ -141,10 +139,11 @@ class _ParentEmailVerificationScreenState
               ),
               const SizedBox(height: 20),
               ElevatedButton(
-                onPressed: () =>
-                    _isResendEnabled && state is ParentRegistrationSuccess
+                onPressed: _isResendEnabled
+                    ? () => (state is ParentRegistrationSuccess)
                         ? _resendCode(state.email)
-                        : null,
+                        : null
+                    : null,
                 child: _isResendEnabled
                     ? const Text('Resend Verification Code')
                     : Text('Resend Code in $_start s'),

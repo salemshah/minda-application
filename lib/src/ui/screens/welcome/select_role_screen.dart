@@ -31,7 +31,7 @@ class SelectRoleScreen extends StatelessWidget {
               context: context,
               orientations: [DeviceOrientation.portraitUp],
               navigationType: NavigationType.pushNamedAndRemoveUntil,
-              routeName: Routes.parentLoginScreen,
+              routeName: Routes.parentWelcomeScreen,
             );
 
             // Navigator.pushNamedAndRemoveUntil(

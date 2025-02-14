@@ -1,40 +1,33 @@
 import 'package:flutter/material.dart';
 
-/// A reusable custom text field widget that wraps [TextFormField].
-///
-/// This widget provides a consistent style for text inputs across the app
-/// and reduces boilerplate code by encapsulating common configuration.
-class CustomTextField extends StatelessWidget {
-  /// Controller for managing the input text.
+class CustomTextFormField extends StatelessWidget {
+  /// Controller to manage the input text.
   final TextEditingController controller;
 
-  /// Label to display inside the text field.
-  final String label;
+  /// Icon to display at the start of the field (e.g., Icons.person).
+  final IconData? prefixIcon;
+
+  /// Hint text shown when the field is empty.
+  final String hintText;
 
   /// Whether to obscure the text (useful for passwords).
   final bool obscureText;
 
-  /// Optional validator function to validate input.
+  /// Optional validator function for validating input.
   final String? Function(String?)? validator;
 
-  /// The type of keyboard to use for the text field.
-  final TextInputType keyboardType;
+  /// Content padding inside the TextFormField.
+  final EdgeInsets contentPadding;
 
-  /// Callback for handling text changes.
-  final ValueChanged<String>? onChanged;
 
-  /// Maximum number of lines for the text field.
-  final int maxLines;
-
-  const CustomTextField({
+  const CustomTextFormField({
     super.key,
     required this.controller,
-    required this.label,
+    this.prefixIcon,
+    required this.hintText,
     this.obscureText = false,
     this.validator,
-    this.keyboardType = TextInputType.text,
-    this.onChanged,
-    this.maxLines = 1,
+    this.contentPadding = const EdgeInsets.all(16),
   });
 
   @override
@@ -43,13 +36,13 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText,
       validator: validator,
-      keyboardType: keyboardType,
-      onChanged: onChanged,
-      maxLines: maxLines,
       decoration: InputDecoration(
-        labelText: label,
-        // You can customize the border style as needed
-        border: const OutlineInputBorder(),
+        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
+        hintText: hintText,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(14.0)
+        ),
+        contentPadding: contentPadding,
       ),
     );
   }

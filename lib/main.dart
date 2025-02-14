@@ -16,6 +16,7 @@ import 'package:minda_application/src/ui/screens/parent/parent_email_verificatio
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_welcome_screen.dart';
 import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart';
 
 // Import utils and themes
@@ -79,6 +80,11 @@ class MindaApp extends StatelessWidget {
         ),
         routes: {
           /// ============================== Parent Screens ===================================
+          Routes.parentWelcomeScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentWelcomeScreen(),
+              ),
           Routes.parentLoginScreen: (context) => OrientationWidget(
                 routeObserver: routeObserver,
                 orientations: [DeviceOrientation.portraitUp],

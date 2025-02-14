@@ -1,4 +1,5 @@
 class Routes {
+  static const String parentWelcomeScreen = '/parent_welcome_screen';
   static const String parentLoginScreen = '/parent_login_screen';
   static const String parentRegisterScreen = '/parent_register_screen';
   static const String parentEmailVerificationScreen =
