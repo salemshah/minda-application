@@ -35,7 +35,7 @@ class Assets {
   static const String parentParentLoginResponse = 'lib/src/models/parent/parent_login_response.dart';
   static const String parentParentLoginScreen = 'lib/src/ui/screens/parent/parent_login_screen.dart';
   static const String parentParentModel = 'lib/src/models/parent/parent_model.dart';
-  static const String parentParentProfile = 'lib/src/ui/screens/parent/parent_profile.dart';
+  static const String parentParentProfile = 'lib/src/ui/screens/parent/parent_profile_screen.dart';
   static const String parentParentRegisterScreen = 'lib/src/ui/screens/parent/parent_register_screen.dart';
   static const String parentParentWelcomeScreen = 'lib/src/ui/screens/parent/parent_welcome_screen.dart';
   static const String repositoriesBaseRepository = 'lib/src/repositories/base_repository.dart';

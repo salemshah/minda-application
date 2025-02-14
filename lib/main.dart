@@ -15,6 +15,7 @@ import 'package:minda_application/src/ui/screens/parent/parent_dashboard_screen.
 import 'package:minda_application/src/ui/screens/parent/parent_email_verification_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_profile_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_welcome_screen.dart';
 import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart';
@@ -73,6 +74,7 @@ class MindaApp extends StatelessWidget {
               builder: (context, child) {
                 // return const ParentLoginScreen();
                 // return const ParentCompleteRegistrationScreen();
+                // return const ParentProfileScreen();
                 return const SelectRoleScreen();
               },
             );

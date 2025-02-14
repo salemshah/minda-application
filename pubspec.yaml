@@ -54,6 +54,27 @@ flutter:
     - assets/fonts/
     - assets/fonts/Sriracha/
     - lib/src/repositories/
+    - lib/src/ui/screens/parent/
+    - lib/
+    - lib/src/
+    - lib/src/ui/
+    - lib/src/ui/common/
+    - lib/src/ui/themes/
+    - lib/src/ui/screens/
+    - lib/src/ui/screens/welcome/
+    - lib/src/ui/widgets/
+    - lib/src/blocs/
+    - lib/src/blocs/child/
+    - lib/src/blocs/parent/
+    - lib/src/utils/
+    - lib/src/utils/themes/
+    - lib/src/utils/themes/custom_themes/
+    - lib/src/config/
+    - lib/src/models/
+    - lib/src/models/parent/
+    - lib/src/services/
+    - lib/src/data_provider/
+    - lib/generated/
 
   fonts:
     - family: Sriracha
