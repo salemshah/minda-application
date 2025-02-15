@@ -82,6 +82,26 @@ class ParentLoginSuccess extends ParentAuthState {
 }
 
 ///==================================================================
+/// State used when parent update profile  succeeds
+///==================================================================
+class ParentUpdateProfileSuccess extends ParentAuthState {
+  final ParentModel parent;
+
+  ParentUpdateProfileSuccess({
+    required this.parent,
+  });
+}
+
+///==================================================================
+/// State used when parent update profile failure
+///==================================================================
+class ParentUpdateProfileFailure extends ParentAuthState {
+  final String error;
+
+  ParentUpdateProfileFailure({required this.error});
+}
+
+///==================================================================
 /// State used when parent login failure
 ///==================================================================
 class ParentLoginFailure extends ParentAuthState {
@@ -144,4 +164,22 @@ class ParentLogoutFailure extends ParentAuthState {
   final String error;
 
   ParentLogoutFailure({required this.error});
+}
+
+///==================================================================
+/// State used when get profile succeeds
+///==================================================================
+class ParentUpdatePasswordSuccess extends ParentAuthState {
+  final String message;
+
+  ParentUpdatePasswordSuccess({required this.message});
+}
+
+///==================================================================
+/// State used when get profile failure
+///==================================================================
+class ParentUpdatePasswordFailure extends ParentAuthState {
+  final String error;
+
+  ParentUpdatePasswordFailure({required this.error});
 }

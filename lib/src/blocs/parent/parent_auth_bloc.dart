@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:minda_application/src/repositories/parent_repository.dart';
@@ -19,6 +22,8 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
     on<ParentLoginRequested>(_parentLogin);
     on<ParentGetProfileRequested>(_parentGetProfile);
     on<ParentLogoutRequested>(_parentLogout);
+    on<ParentUpdateProfileRequested>(_parentUpdateProfile);
+    on<ParentUpdatePasswordRequested>(_onParentUpdatePassword);
   }
 
   ///======================================================
@@ -49,7 +54,26 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       );
       emit(ParentRegistrationSuccess(message: message, email: event.email));
     } catch (e) {
-      emit(ParentRegistrationFailure(error: e.toString()));
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentRegistrationFailure(error: errorMessage));
+    }
+  }
+
+  ///======================================================
+  /// Handles the ParentRegisterRequested event.
+  /// =====================================================
+  Future<void> _onParentUpdatePassword(ParentUpdatePasswordRequested event,
+      Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+    try {
+      final message = await parentRepository.updateParentPassword(
+        oldPassword: event.oldPassword,
+        newPassword: event.newPassword,
+      );
+      emit(ParentUpdatePasswordSuccess(message: message));
+    } catch (e) {
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentUpdatePasswordFailure(error: errorMessage));
     }
   }
 
@@ -65,7 +89,8 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       );
       emit(ParentEmailVerificationSuccess(message: message));
     } catch (e) {
-      emit(ParentEmailVerificationFailure(error: e.toString()));
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentEmailVerificationFailure(error: errorMessage));
     }
   }
 
@@ -82,7 +107,8 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
           email: event.email);
       emit(ParentResendVerificationSuccess(message: message));
     } catch (e) {
-      emit(ParentResendVerificationFailure(message: e.toString()));
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentResendVerificationFailure(message: errorMessage));
     }
   }
 
@@ -106,7 +132,8 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
 
       emit(ParentCompleteRegistrationSuccess(parent: parent, message: message));
     } catch (e) {
-      emit(ParentCompleteRegistrationFailure(error: e.toString()));
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentCompleteRegistrationFailure(error: errorMessage));
     }
   }
 
@@ -134,7 +161,30 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
         refreshToken: refreshToken,
       ));
     } catch (e) {
-      emit(ParentLoginFailure(error: e.toString()));
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentLoginFailure(error: errorMessage));
+    }
+  }
+
+  ///======================================================
+  /// handle ParentUpdateProfileRequested event
+  /// =====================================================
+  Future<void> _parentUpdateProfile(
+      ParentUpdateProfileRequested event, Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+    try {
+      final parent = await parentRepository.parentUpdateProfile(
+        firstName: event.firstName,
+        lastName: event.lastName,
+        birthDate: event.birthDate,
+        phoneNumber: event.phoneNumber,
+        addressPostal: event.addressPostal,
+      );
+
+      emit(ParentUpdateProfileSuccess(parent: parent));
+    } catch (e) {
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentUpdateProfileFailure(error: errorMessage));
     }
   }
 
@@ -148,8 +198,8 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       final parent = await parentRepository.getParentProfile();
       emit(ParentGetProfileSuccess(parent: parent));
     } catch (e) {
-      print(e.toString());
-      emit(ParentGetProfileFailure(error: e.toString()));
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentGetProfileFailure(error: errorMessage));
     }
   }
 
@@ -165,7 +215,32 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       emit(AuthUnauthenticated());
       emit(ParentLogoutSuccess(message: response));
     } catch (e) {
-      emit(ParentLogoutFailure(error: e.toString()));
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentLogoutFailure(error: errorMessage));
     }
   }
+}
+
+
+/// Tries to extract a meaningful error message from an exception.
+String parseErrorMessage(Object error) {
+  // Convert the error to string.
+  final errorStr = error.toString();
+
+  // Find the start of a JSON structure.
+  final jsonStart = errorStr.indexOf('{');
+  if (jsonStart != -1) {
+    try {
+      final jsonString = errorStr.substring(jsonStart);
+      final Map<String, dynamic> errorJson = jsonDecode(jsonString);
+      // Return the 'message' field if available.
+      if (errorJson.containsKey('message')) {
+        return errorJson['message'];
+      }
+    } catch (_) {
+      // If parsing fails, just fall back to errorStr.
+    }
+  }
+  // Fallback: return the original error string.
+  return errorStr;
 }

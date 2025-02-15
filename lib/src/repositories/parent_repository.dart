@@ -1,3 +1,4 @@
+import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/models/parent/parent_complete_registration_response.dart';
 import 'package:minda_application/src/models/parent/parent_login_response.dart';
 import 'package:minda_application/src/models/parent/parent_model.dart';
@@ -49,6 +50,27 @@ class ParentRepository extends BaseRepository {
     }
   }
 
+  Future<String> updateParentPassword({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    final data = {"oldPassword": oldPassword, "newPassword": newPassword};
+
+    final response = await apiService.put('/parent/update-password', data);
+    if (response.containsKey('message')) {
+      final message = response["message"];
+      if (message is String) {
+        return message;
+      } else {
+        // Optionally log this for debugging.
+        throw Exception("Unexpected response type for message");
+      }
+    } else {
+      throw Exception("Unexpected response format");
+    }
+  }
+
+
   ///============================================
   /// Parent Complete registration
   /// ===========================================
@@ -63,9 +85,36 @@ class ParentRepository extends BaseRepository {
       "addressPostal": addressPostal
     };
 
-    final response = await apiService.put("/parent/complete-registration", data);
+    final response =
+        await apiService.put("/parent/complete-registration", data);
     if (response.containsKey('message') && response.containsKey('parent')) {
       return ParentCompleteRegistrationResponse.fromJson(response);
+    } else {
+      throw Exception("Unexpected response format");
+    }
+  }
+
+  ///============================================
+  /// Parent update profile
+  /// ===========================================
+  Future<ParentModel> parentUpdateProfile({
+    required String firstName,
+    required String lastName,
+    required String birthDate,
+    required String phoneNumber,
+    required String addressPostal,
+  }) async {
+    final data = {
+      "firstName": firstName,
+      "lastName": lastName,
+      "birthDate": birthDate,
+      "phoneNumber": phoneNumber,
+      "addressPostal": addressPostal
+    };
+
+    final response = await apiService.put("/parent/profile", data);
+    if (response.containsKey('parent')) {
+      return ParentModel.fromJson(response["parent"]);
     } else {
       throw Exception("Unexpected response format");
     }
@@ -87,7 +136,7 @@ class ParentRepository extends BaseRepository {
   Future<String> parentResendEmailVerification({required String email}) async {
     final data = {"email": email};
     final response =
-    await apiService.post("/parent/resend-verification-email", data);
+        await apiService.post("/parent/resend-verification-email", data);
     return response['message'];
   }
 

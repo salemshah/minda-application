@@ -5,7 +5,7 @@ enum NavigationType {
   push,
   pushReplacement,
   pushNamedAndRemoveUntil,
-  popAndPushNamed,
+  pushNamed,
 }
 
 Future<void> navigateWithOrientation({
@@ -57,9 +57,9 @@ Future<void> navigateWithOrientation({
       }
       break;
 
-    case NavigationType.popAndPushNamed:
+    case NavigationType.pushNamed:
       if (context.mounted) {
-        await Navigator.popAndPushNamed(context, routeName);
+        await Navigator.pushNamed(context, routeName);
       }
       break;
   }
