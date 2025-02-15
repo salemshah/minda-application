@@ -49,6 +49,24 @@ class ParentCompleteRegistrationRequested extends ParentAuthEvent {
   });
 }
 
+/// event for ParentUpdateProfileRequested
+class ParentUpdateProfileRequested extends ParentAuthEvent {
+  final String firstName;
+  final String lastName;
+  final String birthDate;
+  final String phoneNumber;
+  final String addressPostal;
+
+  ParentUpdateProfileRequested({
+    required this.firstName,
+    required this.lastName,
+    required this.birthDate,
+    required this.phoneNumber,
+    required this.addressPostal,
+  });
+}
+
+
 /// Event for parent login.
 class ParentLoginRequested extends ParentAuthEvent {
   final String email;
@@ -67,3 +85,15 @@ class ParentGetProfileRequested extends ParentAuthEvent {
 class ParentLogoutRequested extends ParentAuthEvent {
   ParentLogoutRequested();
 }
+
+/// event for ParentUpdatePasswordRequested
+class ParentUpdatePasswordRequested extends ParentAuthEvent {
+  final String oldPassword;
+  final String newPassword;
+
+  ParentUpdatePasswordRequested({
+    required this.oldPassword,
+    required this.newPassword,
+  });
+}
+

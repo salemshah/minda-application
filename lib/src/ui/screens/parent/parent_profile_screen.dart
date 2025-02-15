@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
+import 'package:minda_application/src/ui/common/navigate_with_oriantation.dart';
 
 import '../../../blocs/parent/parent_auth_bloc.dart';
 import '../../../blocs/parent/parent_auth_event.dart';
+import '../../../config/routes.dart';
 
 class ParentProfileScreen extends StatefulWidget {
   const ParentProfileScreen({super.key});
@@ -78,11 +81,16 @@ class _ParentProfileScreenState extends State<ParentProfileScreen> {
                   children: [
                     // My Profile
                     ListTile(
-
                       leading: const Icon(Icons.person_outline),
                       title: const Text('My Profile'),
                       onTap: () {
-                        // Navigate to My Profile page
+                        navigateWithOrientation(
+                          context: context,
+                          orientations: [DeviceOrientation.portraitUp],
+                          navigationType:
+                              NavigationType.pushNamed,
+                          routeName: Routes.parentUpdateProfileScreen,
+                        );
                       },
                     ),
                     // Settings

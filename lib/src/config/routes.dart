@@ -7,6 +7,7 @@ class Routes {
   static const String parentCompleteRegistrationScreen =
       '/parent_complete_registration_screen';
   static const String parentDashboardScreen = '/parent_dashboard_screen';
+  static const String parentUpdateProfileScreen = '/parent_update_profile_screen';
 
   // child
   static const String childLoginScreen = '/child_login_screen';

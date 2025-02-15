@@ -17,6 +17,7 @@ import 'package:minda_application/src/ui/screens/parent/parent_complete_registra
 import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_profile_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/parent_update_profile_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_welcome_screen.dart';
 import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart';
 
@@ -112,6 +113,12 @@ class MindaApp extends StatelessWidget {
                 routeObserver: routeObserver,
                 orientations: [DeviceOrientation.portraitUp],
                 child: ParentDashboardScreen(),
+              ),
+
+          Routes.parentUpdateProfileScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentUpdateProfileScreen(),
               ),
 
           /// ============================== Child Screens ===================================

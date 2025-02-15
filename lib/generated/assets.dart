@@ -35,8 +35,9 @@ class Assets {
   static const String parentParentLoginResponse = 'lib/src/models/parent/parent_login_response.dart';
   static const String parentParentLoginScreen = 'lib/src/ui/screens/parent/parent_login_screen.dart';
   static const String parentParentModel = 'lib/src/models/parent/parent_model.dart';
-  static const String parentParentProfile = 'lib/src/ui/screens/parent/parent_profile_screen.dart';
+  static const String parentParentProfileScreen = 'lib/src/ui/screens/parent/parent_profile_screen.dart';
   static const String parentParentRegisterScreen = 'lib/src/ui/screens/parent/parent_register_screen.dart';
+  static const String parentParentUpdateProfileScreen = 'lib/src/ui/screens/parent/parent_update_profile_screen.dart';
   static const String parentParentWelcomeScreen = 'lib/src/ui/screens/parent/parent_welcome_screen.dart';
   static const String repositoriesBaseRepository = 'lib/src/repositories/base_repository.dart';
   static const String repositoriesParentRepository = 'lib/src/repositories/parent_repository.dart';
@@ -48,7 +49,9 @@ class Assets {
   static const String utilsFontSize = 'lib/src/utils/font_size.dart';
   static const String utilsJwt = 'lib/src/utils/jwt.dart';
   static const String welcomeSelectRoleScreen = 'lib/src/ui/screens/welcome/select_role_screen.dart';
+  static const String widgetsChangePasswordDialog = 'lib/src/ui/widgets/change_password_dialog.dart';
   static const String widgetsCustomTextField = 'lib/src/ui/widgets/custom_text_field.dart';
+  static const String widgetsInputDatePicker = 'lib/src/ui/widgets/input_date_picker.dart';
   static const String widgetsLabeledTextFormField = 'lib/src/ui/widgets/labeled_text_form_field.dart';
   static const String widgetsLoadingWidget = 'lib/src/ui/widgets/loading_widget.dart';
   static const String widgetsRiveAnimatedButton = 'lib/src/ui/widgets/rive_animated_button.dart';
