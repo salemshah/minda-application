@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:minda_application/src/ui/screens/child/child_game_home_screen.dart';
 
 import '../../../config/routes.dart';
 
@@ -197,7 +196,7 @@ class CharacterCard extends StatelessWidget {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.6),
+                        color: Colors.black,
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(

@@ -1,4 +1,3 @@
-import 'package:minda_application/src/models/parent/parent_model.dart';
 
 /// Base class for parent authentication events.
 abstract class ParentAuthEvent {}
@@ -66,7 +65,6 @@ class ParentUpdateProfileRequested extends ParentAuthEvent {
   });
 }
 
-
 /// Event for parent login.
 class ParentLoginRequested extends ParentAuthEvent {
   final String email;
@@ -97,3 +95,28 @@ class ParentUpdatePasswordRequested extends ParentAuthEvent {
   });
 }
 
+// ======================= parent child ==================
+
+/// event for ParentChildRegisterRequested
+class ParentChildRegistrationRequested extends ParentAuthEvent {
+  final String password;
+  final String birthDate;
+  final String firstName;
+  final String lastName;
+  final String gender;
+  final String schoolLevel;
+
+  ParentChildRegistrationRequested({
+    required this.firstName,
+    required this.lastName,
+    required this.birthDate,
+    required this.gender,
+    required this.schoolLevel,
+    required this.password,
+  });
+}
+
+/// event for ParentChildGetRequested
+class ParentChildGetRequested extends ParentAuthEvent {
+  ParentChildGetRequested();
+}

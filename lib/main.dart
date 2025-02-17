@@ -11,13 +11,13 @@ import 'package:minda_application/src/ui/screens/child/child_game_home_screen.da
 import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
 import 'package:minda_application/src/ui/screens/child/child_select_character_screen.dart';
 import 'package:minda_application/src/ui/screens/child/child_shop_screen.dart';
-import 'package:minda_application/src/ui/screens/parent/parent_dashboard_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/dashboard/child/parent_child_registration_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/dashboard/parent_dashboard_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_email_verification_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_complete_registration_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_login_screen.dart';
-import 'package:minda_application/src/ui/screens/parent/parent_profile_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_register_screen.dart';
-import 'package:minda_application/src/ui/screens/parent/parent_update_profile_screen.dart';
+import 'package:minda_application/src/ui/screens/parent/dashboard/account/parent_update_profile_screen.dart';
 import 'package:minda_application/src/ui/screens/parent/parent_welcome_screen.dart';
 import 'package:minda_application/src/ui/screens/welcome/select_role_screen.dart';
 
@@ -119,6 +119,12 @@ class MindaApp extends StatelessWidget {
                 routeObserver: routeObserver,
                 orientations: [DeviceOrientation.portraitUp],
                 child: ParentUpdateProfileScreen(),
+              ),
+
+          Routes.parentChildRegistrationScreen: (context) => OrientationWidget(
+                routeObserver: routeObserver,
+                orientations: [DeviceOrientation.portraitUp],
+                child: ParentChildRegistrationScreen(),
               ),
 
           /// ============================== Child Screens ===================================

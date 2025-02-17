@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 // orientation_handler.dart
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class OrientationWidget extends StatefulWidget {
   final Widget child;

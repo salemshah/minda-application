@@ -2,19 +2,26 @@
 class Assets {
   Assets._();
 
+  static const String accountParentProfileScreen = 'lib/src/ui/screens/parent/dashboard/account/parent_profile_screen.dart';
+  static const String accountParentUpdateProfileScreen = 'lib/src/ui/screens/parent/dashboard/account/parent_update_profile_screen.dart';
   static const String backgroundSpaceBackground = 'assets/images/background/space_background.jpeg';
   static const String backgroundSpaceBackground1 = 'assets/images/background/space_background1.jpg';
   static const String backgroundSpaceBackground2 = 'assets/images/background/space_background2.jpg';
   static const String childChildGameHomeScreen = 'lib/src/ui/screens/child/child_game_home_screen.dart';
   static const String childChildLoginScreen = 'lib/src/ui/screens/child/child_login_screen.dart';
+  static const String childChildModel = 'lib/src/models/child/child_model.dart';
   static const String childChildSelectCharacterScreen = 'lib/src/ui/screens/child/child_select_character_screen.dart';
   static const String childChildShopScreen = 'lib/src/ui/screens/child/child_shop_screen.dart';
+  static const String childChildrenListScreen = 'lib/src/ui/screens/parent/dashboard/child/children_list_screen.dart';
   static const String childModalCenter = 'lib/src/ui/screens/child/modal_center.dart';
+  static const String childParentChildRegistrationScreen = 'lib/src/ui/screens/parent/dashboard/child/parent_child_registration_screen.dart';
   static const String commonNavigateWithOriantation = 'lib/src/ui/common/navigate_with_oriantation.dart';
   static const String commonOrientationHandler = 'lib/src/ui/common/orientation_handler.dart';
   static const String commonOrientationWrapper = 'lib/src/ui/common/orientation_wrapper.dart';
   static const String configRoutes = 'lib/src/config/routes.dart';
   static const String customThemesTextThem = 'lib/src/utils/themes/custom_themes/text_them.dart';
+  static const String dashboardMainScreen = 'lib/src/ui/screens/parent/dashboard/main_screen.dart';
+  static const String dashboardParentDashboardScreen = 'lib/src/ui/screens/parent/dashboard/parent_dashboard_screen.dart';
   static const String generatedAssets = 'lib/generated/assets.dart';
   static const String iconsCoin = 'assets/icons/coin.png';
   static const String iconsCoins = 'assets/icons/coins.png';
@@ -30,14 +37,11 @@ class Assets {
   static const String parentParentAuthState = 'lib/src/blocs/parent/parent_auth_state.dart';
   static const String parentParentCompleteRegistrationResponse = 'lib/src/models/parent/parent_complete_registration_response.dart';
   static const String parentParentCompleteRegistrationScreen = 'lib/src/ui/screens/parent/parent_complete_registration_screen.dart';
-  static const String parentParentDashboardScreen = 'lib/src/ui/screens/parent/parent_dashboard_screen.dart';
   static const String parentParentEmailVerificationScreen = 'lib/src/ui/screens/parent/parent_email_verification_screen.dart';
   static const String parentParentLoginResponse = 'lib/src/models/parent/parent_login_response.dart';
   static const String parentParentLoginScreen = 'lib/src/ui/screens/parent/parent_login_screen.dart';
   static const String parentParentModel = 'lib/src/models/parent/parent_model.dart';
-  static const String parentParentProfileScreen = 'lib/src/ui/screens/parent/parent_profile_screen.dart';
   static const String parentParentRegisterScreen = 'lib/src/ui/screens/parent/parent_register_screen.dart';
-  static const String parentParentUpdateProfileScreen = 'lib/src/ui/screens/parent/parent_update_profile_screen.dart';
   static const String parentParentWelcomeScreen = 'lib/src/ui/screens/parent/parent_welcome_screen.dart';
   static const String repositoriesBaseRepository = 'lib/src/repositories/base_repository.dart';
   static const String repositoriesParentRepository = 'lib/src/repositories/parent_repository.dart';
@@ -50,6 +54,7 @@ class Assets {
   static const String utilsJwt = 'lib/src/utils/jwt.dart';
   static const String welcomeSelectRoleScreen = 'lib/src/ui/screens/welcome/select_role_screen.dart';
   static const String widgetsChangePasswordDialog = 'lib/src/ui/widgets/change_password_dialog.dart';
+  static const String widgetsCustomDropdownFormField = 'lib/src/ui/widgets/custom_dropdown_form_field.dart';
   static const String widgetsCustomTextField = 'lib/src/ui/widgets/custom_text_field.dart';
   static const String widgetsInputDatePicker = 'lib/src/ui/widgets/input_date_picker.dart';
   static const String widgetsLabeledTextFormField = 'lib/src/ui/widgets/labeled_text_form_field.dart';

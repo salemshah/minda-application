@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:minda_application/src/config/routes.dart';
-import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
 import 'package:minda_application/src/ui/widgets/rive_animated_button.dart';
 
 class ChildShopScreen extends StatefulWidget {
@@ -255,7 +254,7 @@ class LandscapeMode extends StatelessWidget {
         SizedBox(height: isApplyHeight ? mainSize * .04 : 0),
         Container(
           decoration: BoxDecoration(
-              color: Colors.white.withOpacity(.2),
+              color: Colors.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(100),
               )),

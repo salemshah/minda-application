@@ -39,11 +39,26 @@ class CustomTextFormField extends StatelessWidget {
       decoration: InputDecoration(
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
         hintText: hintText,
+        enabledBorder: OutlineInputBorder( // Border when the field is not focused
+          borderSide: BorderSide(color: Color(0xFFBDBDBD), width: 2.0),
+          borderRadius: BorderRadius.circular(14.0),
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(14.0)
+          borderRadius: BorderRadius.circular(14.0),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Color(0xFF6959C3), width: 2.0),
+          borderRadius: BorderRadius.circular(14.0),
+        ),
+        errorBorder: OutlineInputBorder( // Border when validation fails
+          borderRadius: BorderRadius.circular(14.0),
+        ),
+        focusedErrorBorder: OutlineInputBorder( // Border when focused with an error
+          borderRadius: BorderRadius.circular(14.0),
         ),
         contentPadding: contentPadding,
       ),
     );
   }
+
 }

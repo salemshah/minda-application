@@ -128,8 +128,8 @@ class _ParentUpdateProfileScreenState extends State<ParentUpdateProfileScreen> {
         // When profile data is successfully fetched, populate the form and store original values.
         if (state is ParentGetProfileSuccess) {
           setState(() {
-            _originalFirstName = state.parent.firstName ?? '';
-            _originalLastName = state.parent.lastName ?? '';
+            _originalFirstName = state.parent.firstName;
+            _originalLastName = state.parent.lastName;
             _originalPhone = state.parent.phoneNumber ?? '';
             _originalAddressPostal = state.parent.addressPostal ?? '';
             // Convert ISO date to dd/MM/yyyy.

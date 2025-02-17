@@ -1,3 +1,5 @@
+import 'package:minda_application/src/models/child/child_model.dart';
+
 import '../../models/parent/parent_model.dart';
 
 abstract class ParentAuthState {}
@@ -182,4 +184,47 @@ class ParentUpdatePasswordFailure extends ParentAuthState {
   final String error;
 
   ParentUpdatePasswordFailure({required this.error});
+}
+
+// ======================================= parent child ========================
+
+///==================================================================
+/// State used when  parent child registration succeeds
+///==================================================================
+class ParentChildRegistrationSuccess extends ParentAuthState {
+  final ChildModel child;
+
+  ParentChildRegistrationSuccess({
+    required this.child
+  });
+}
+
+///==================================================================
+/// State used when parent child registration failure
+///==================================================================
+class ParentChildRegistrationFailure extends ParentAuthState {
+  final String error;
+
+  ParentChildRegistrationFailure({required this.error});
+}
+
+///==================================================================
+/// State used when  parent child Get succeeds
+///==================================================================
+class ParentChildGetSuccess extends ParentAuthState {
+  final List<ChildModel> children;
+  ParentChildGetSuccess({
+    required this.children
+  });
+  List<Object?> get props => [children];
+}
+
+///==================================================================
+/// State used when parent child Get failure
+///==================================================================
+class ParentChildGetFailure extends ParentAuthState {
+  final String error;
+
+  ParentChildGetFailure({required this.error});
+
 }

@@ -1,4 +1,4 @@
-import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
+import 'package:minda_application/src/models/child/child_model.dart';
 import 'package:minda_application/src/models/parent/parent_complete_registration_response.dart';
 import 'package:minda_application/src/models/parent/parent_login_response.dart';
 import 'package:minda_application/src/models/parent/parent_model.dart';
@@ -69,7 +69,6 @@ class ParentRepository extends BaseRepository {
       throw Exception("Unexpected response format");
     }
   }
-
 
   ///============================================
   /// Parent Complete registration
@@ -158,5 +157,51 @@ class ParentRepository extends BaseRepository {
   Future<String> parentLogout() async {
     final response = await apiService.post("/auth/logout", {});
     return response['message'];
+  }
+
+// ========================== parent child ===================================
+
+  ///============================================
+  /// Parent child registration
+  /// ===========================================
+  Future<ChildModel> parentChildRegistration({
+    required String firstName,
+    required String lastName,
+    required String birthDate,
+    required String gender,
+    required String schoolLevel,
+    required String password,
+  }) async {
+    final data = {
+      "firstName": firstName,
+      "lastName": lastName,
+      "birthDate": birthDate,
+      "gender": gender,
+      "schoolLevel": schoolLevel,
+      "password": password
+    };
+
+    final response = await apiService.post("/parent/child/register", data);
+    if (response.containsKey('child')) {
+      return ChildModel.fromJson(response["child"]);
+    } else {
+      throw Exception("Unexpected response format");
+    }
+  }
+
+  ///============================================
+  /// Parent children get
+  /// ===========================================
+  Future<List<ChildModel>> parentChildGet() async {
+    final response = await apiService.get("/parent/children");
+    if (response.containsKey('children')) {
+      final List<dynamic> childrenJson = response["children"];
+      final List<ChildModel> children = childrenJson
+          .map((childJson) => ChildModel.fromJson(childJson))
+          .toList();
+      return children;
+    } else {
+      throw Exception("Unexpected response format");
+    }
   }
 }

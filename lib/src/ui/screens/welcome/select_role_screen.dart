@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
-import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
 import 'package:minda_application/src/config/routes.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 

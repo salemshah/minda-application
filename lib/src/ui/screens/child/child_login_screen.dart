@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:minda_application/src/ui/common/orientation_wrapper.dart';
-import 'package:minda_application/src/ui/screens/child/child_select_character_screen.dart';
 import 'package:minda_application/src/ui/widgets/labeled_text_form_field.dart';
 
 import '../../../config/routes.dart';
@@ -130,17 +129,12 @@ class _AuthFormState extends State<AuthForm> {
 
   void _submitForm() {
     if (_formKey.currentState!.validate()) {
-      // Form is valid, process the data
-      print('Pseudo: ${_usernameController.text}');
-      print('Password: ${_passwordController.text}');
 
       Navigator.pushNamedAndRemoveUntil(
         context,
         Routes.childSelectCharacterScreen,
             (route) => false,
       );
-    } else {
-      print('Validation failed');
     }
   }
 

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -24,6 +23,8 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
     on<ParentLogoutRequested>(_parentLogout);
     on<ParentUpdateProfileRequested>(_parentUpdateProfile);
     on<ParentUpdatePasswordRequested>(_onParentUpdatePassword);
+    on<ParentChildRegistrationRequested>(_onParentChildRegistration);
+    on<ParentChildGetRequested>(_onParentChildGet);
   }
 
   ///======================================================
@@ -219,8 +220,47 @@ class ParentAuthBloc extends Bloc<ParentAuthEvent, ParentAuthState> {
       emit(ParentLogoutFailure(error: errorMessage));
     }
   }
-}
 
+  //================================ parent child =========================
+
+  ///======================================================
+  /// handle ParentChildRegistrationRequested event
+  /// =====================================================
+  Future<void> _onParentChildRegistration(
+      ParentChildRegistrationRequested event,
+      Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+    try {
+      final child = await parentRepository.parentChildRegistration(
+        firstName: event.firstName,
+        lastName: event.lastName,
+        birthDate: event.birthDate,
+        gender: event.gender,
+        schoolLevel: event.schoolLevel,
+        password: event.password,
+      );
+      emit(ParentChildRegistrationSuccess(child: child));
+    } catch (e) {
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentChildRegistrationFailure(error: errorMessage));
+    }
+  }
+
+  ///======================================================
+  /// handle ParentChildGetRequested event
+  /// =====================================================
+  Future<void> _onParentChildGet(
+      ParentChildGetRequested event, Emitter<ParentAuthState> emit) async {
+    emit(ParentAuthLoading());
+    try {
+      final children = await parentRepository.parentChildGet();
+      emit(ParentChildGetSuccess(children: children));
+    } catch (e) {
+      String errorMessage = parseErrorMessage(e);
+      emit(ParentChildGetFailure(error: errorMessage));
+    }
+  }
+}
 
 /// Tries to extract a meaningful error message from an exception.
 String parseErrorMessage(Object error) {

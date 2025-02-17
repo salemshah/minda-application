@@ -15,7 +15,7 @@ class ParentCompleteRegistrationScreen extends StatefulWidget {
   const ParentCompleteRegistrationScreen({super.key});
 
   @override
-  _ParentCompleteRegistrationScreenState createState() =>
+  State<ParentCompleteRegistrationScreen> createState() =>
       _ParentCompleteRegistrationScreenState();
 }
 

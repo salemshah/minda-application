@@ -73,6 +73,10 @@ class _InputDatePickerState extends State<InputDatePicker> {
       decoration: InputDecoration(
         hintText: widget.hintText,
         prefixIcon: Icon(Icons.calendar_today),
+        enabledBorder: OutlineInputBorder( // Border when the field is not focused
+          borderSide: BorderSide(color: Color(0xFFBDBDBD), width: 2.0),
+          borderRadius: BorderRadius.circular(14.0),
+        ),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(14.0)),
       ),
       onTap: () {

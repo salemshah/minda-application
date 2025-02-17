@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:minda_application/src/ui/screens/child/child_login_screen.dart';
 import 'package:rive/rive.dart';
 
 class RiveAnimatedButton extends StatelessWidget {

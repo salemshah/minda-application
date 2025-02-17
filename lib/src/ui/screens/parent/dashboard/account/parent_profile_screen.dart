@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
 import 'package:minda_application/src/ui/common/navigate_with_oriantation.dart';
 
-import '../../../blocs/parent/parent_auth_bloc.dart';
-import '../../../blocs/parent/parent_auth_event.dart';
-import '../../../config/routes.dart';
+import '../../../../../blocs/parent/parent_auth_bloc.dart';
+import '../../../../../blocs/parent/parent_auth_event.dart';
+import '../../../../../config/routes.dart';
 
 class ParentProfileScreen extends StatefulWidget {
   const ParentProfileScreen({super.key});
@@ -18,6 +18,12 @@ class ParentProfileScreen extends StatefulWidget {
 class _ParentProfileScreenState extends State<ParentProfileScreen> {
   void _onLogoutPressed() {
     BlocProvider.of<ParentAuthBloc>(context).add(ParentLogoutRequested());
+    navigateWithOrientation(
+      context: context,
+      orientations: [DeviceOrientation.portraitUp],
+      navigationType: NavigationType.pushNamedAndRemoveUntil,
+      routeName: Routes.parentLoginScreen,
+    );
   }
 
   @override
@@ -30,6 +36,9 @@ class _ParentProfileScreenState extends State<ParentProfileScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<ParentAuthBloc, ParentAuthState>(
         builder: (context, state) {
+      // if (state is ParentLogoutSuccess) {
+      //
+      // }
       return Scaffold(
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -87,8 +96,7 @@ class _ParentProfileScreenState extends State<ParentProfileScreen> {
                         navigateWithOrientation(
                           context: context,
                           orientations: [DeviceOrientation.portraitUp],
-                          navigationType:
-                              NavigationType.pushNamed,
+                          navigationType: NavigationType.pushNamed,
                           routeName: Routes.parentUpdateProfileScreen,
                         );
                       },
