@@ -2,7 +2,6 @@ import 'package:date_input_form_field/date_input_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_bloc.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_event.dart';
 import 'package:minda_application/src/blocs/parent/parent_auth_state.dart';
@@ -10,6 +9,7 @@ import 'package:minda_application/src/config/routes.dart';
 import 'package:minda_application/src/ui/common/navigate_with_oriantation.dart';
 import 'package:minda_application/src/ui/widgets/custom_text_field.dart';
 import 'package:minda_application/src/ui/widgets/loading_widget.dart';
+import 'package:intl/intl.dart';
 
 class ParentCompleteRegistrationScreen extends StatefulWidget {
   const ParentCompleteRegistrationScreen({super.key});
@@ -59,7 +59,6 @@ class _ParentCompleteRegistrationScreenState
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       // No AppBar for a full-screen wavy design
       body: LayoutBuilder(
@@ -130,7 +129,7 @@ class _ParentCompleteRegistrationScreenState
                                 'Fill in your details to continue',
                                 style: TextStyle(
                                   fontSize: 16 * textScaleFactor,
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.white.withValues(alpha:0.9),
                                 ),
                               ),
                             ],
@@ -211,10 +210,7 @@ class _ParentCompleteRegistrationScreenState
                                     controller: _phoneNumber,
                                     prefixIcon: Icons.phone_iphone,
                                     hintText: 'Phone number',
-                                    validator: (value) =>
-                                        value == null || value.isEmpty
-                                            ? "Please enter phone number"
-                                            : null,
+                                    validator: (value) => value == null || value.isEmpty ? "Please enter phone number" : null,
                                   ),
                                 ),
                                 const SizedBox(height: 16),

@@ -145,7 +145,7 @@ class _ParentLoginScreenState extends State<ParentLoginScreen> {
                             'Login to your account',
                             style: TextStyle(
                               fontSize: 16 * textScaleFactor,
-                              color: Colors.white.withOpacity(0.9),
+                              color: Colors.white.withValues(alpha:0.9),
                             ),
                           ),
                         ],

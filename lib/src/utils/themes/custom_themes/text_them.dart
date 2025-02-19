@@ -47,7 +47,7 @@ class CustomTextTheme {
     bodySmall: TextStyle(
       fontSize: 14.0,
       fontWeight: FontWeight.w500,
-      color: Colors.black.withOpacity(0.5),
+      color: Colors.black.withValues(alpha:0.5),
     ),
     labelLarge: TextStyle(
       fontSize: 12.0,
@@ -57,7 +57,7 @@ class CustomTextTheme {
     labelMedium: TextStyle(
       fontSize: 12.0,
       fontWeight: FontWeight.normal,
-      color: Colors.black.withOpacity(0.5),
+      color: Colors.black.withValues(alpha:0.5),
     ),
   );
 
@@ -106,7 +106,7 @@ class CustomTextTheme {
     bodySmall: TextStyle(
       fontSize: 14.0,
       fontWeight: FontWeight.w500,
-      color: Colors.white.withOpacity(0.5),
+      color: Colors.white.withValues(alpha:0.5),
     ),
     labelLarge: TextStyle(
       fontSize: 12.0,
@@ -116,7 +116,7 @@ class CustomTextTheme {
     labelMedium: TextStyle(
       fontSize: 12.0,
       fontWeight: FontWeight.normal,
-      color: Colors.white.withOpacity(0.5),
+      color: Colors.white.withValues(alpha:0.5),
     ),
   );
 }

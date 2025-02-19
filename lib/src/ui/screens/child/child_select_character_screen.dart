@@ -196,7 +196,7 @@ class CharacterCard extends StatelessWidget {
                       width: 100,
                       height: 100,
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: Colors.black.withValues(alpha: .5),
                         shape: BoxShape.circle,
                       ),
                       child: const Icon(
