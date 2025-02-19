@@ -13,20 +13,20 @@ class ParentRegisterScreen extends StatefulWidget {
   const ParentRegisterScreen({super.key});
 
   @override
-  _ParentRegisterScreenState createState() => _ParentRegisterScreenState();
+  State<ParentRegisterScreen> createState() => _ParentRegisterScreenState();
 }
 
 class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
   final _formKey = GlobalKey<FormState>();
 
   final TextEditingController _emailController =
-  TextEditingController(text: "salemshahdev@gmail.com");
+      TextEditingController(text: "salemshahdev@gmail.com");
   final TextEditingController _firstNameController =
-  TextEditingController(text: "salem");
+      TextEditingController(text: "salem");
   final TextEditingController _lastNameController =
-  TextEditingController(text: "shah");
+      TextEditingController(text: "shah");
   final TextEditingController _passwordController =
-  TextEditingController(text: "123456");
+      TextEditingController(text: "123456");
 
   @override
   void dispose() {
@@ -55,8 +55,6 @@ class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      // Remove the appBar to match the new wavy design.
-      // appBar: AppBar(title: const Text("Parent Registration")),
       body: LayoutBuilder(
         builder: (context, constraints) {
           // Optional: dynamic text scaling if you want it to adapt to screen width.
@@ -144,7 +142,7 @@ class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
                               'Join the family',
                               style: TextStyle(
                                 fontSize: 16 * textScaleFactor,
-                                color: Colors.white.withOpacity(0.9),
+                                color: Colors.white.withValues(alpha: 0.9),
                               ),
                             ),
                           ],
@@ -164,6 +162,42 @@ class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
                             child: Column(
                               children: [
                                 const SizedBox(height: 80),
+                                // First Name
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: CustomTextFormField(
+                                    prefixIcon: Icons.person,
+                                    controller: _firstNameController,
+                                    hintText: 'First Name',
+                                    validator: (value) =>
+                                        value == null || value.isEmpty
+                                            ? "Please enter first name"
+                                            : null,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+
+                                // Last Name
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: CustomTextFormField(
+                                    prefixIcon: Icons.person,
+                                    controller: _lastNameController,
+                                    hintText: 'Last Name',
+                                    validator: (value) =>
+                                        value == null || value.isEmpty
+                                            ? "Please enter last name"
+                                            : null,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+
                                 // Email
                                 Container(
                                   decoration: BoxDecoration(
@@ -183,42 +217,6 @@ class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
                                       }
                                       return null;
                                     },
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-
-                                // First Name
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: CustomTextFormField(
-                                    prefixIcon: Icons.person,
-                                    controller: _firstNameController,
-                                    hintText: 'First Name',
-                                    validator: (value) => value == null ||
-                                        value.isEmpty
-                                        ? "Please enter first name"
-                                        : null,
-                                  ),
-                                ),
-                                const SizedBox(height: 16),
-
-                                // Last Name
-                                Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: CustomTextFormField(
-                                    prefixIcon: Icons.person,
-                                    controller: _lastNameController,
-                                    hintText: 'Last Name',
-                                    validator: (value) => value == null ||
-                                        value.isEmpty
-                                        ? "Please enter last name"
-                                        : null,
                                   ),
                                 ),
                                 const SizedBox(height: 16),
@@ -251,26 +249,26 @@ class _ParentRegisterScreenState extends State<ParentRegisterScreen> {
                                 state is ParentAuthLoading
                                     ? const LoadingWidget()
                                     : SizedBox(
-                                  width: double.infinity,
-                                  height: 50,
-                                  child: ElevatedButton(
-                                    onPressed: _onRegisterButtonPressed,
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor:
-                                      const Color(0xFF6959C3),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(8),
+                                        width: double.infinity,
+                                        height: 50,
+                                        child: ElevatedButton(
+                                          onPressed: _onRegisterButtonPressed,
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color(0xFF6959C3),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            'Enregistrer',
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: Colors.white),
+                                          ),
+                                        ),
                                       ),
-                                    ),
-                                    child: const Text(
-                                      'Enregistrer',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                ),
                                 const SizedBox(height: 20),
 
                                 // ALREADY HAVE AN ACCOUNT?

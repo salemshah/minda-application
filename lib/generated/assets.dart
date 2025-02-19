@@ -29,6 +29,12 @@ class Assets {
   static const String imagesAstronaut = 'assets/images/astronaut.png';
   static const String imagesAstronaut1 = 'assets/images/astronaut1.png';
   static const String imagesAstronaut2 = 'assets/images/astronaut2.png';
+  static const String imagesAvatar1 = 'assets/images/avatar1.png';
+  static const String imagesAvatar2 = 'assets/images/avatar2.png';
+  static const String imagesAvatar3 = 'assets/images/avatar3.png';
+  static const String imagesAvatar4 = 'assets/images/avatar4.png';
+  static const String imagesAvatar5 = 'assets/images/avatar5.png';
+  static const String imagesAvatar6 = 'assets/images/avatar6.png';
   static const String imagesSpaceship = 'assets/images/spaceship.png';
   static const String libMain = 'lib/main.dart';
   static const String logoMindaLogo = 'assets/logo/minda_logo.png';
@@ -51,6 +57,7 @@ class Assets {
   static const String srirachaSrirachaRegular = 'assets/fonts/Sriracha/Sriracha-Regular.ttf';
   static const String utilsButtonSize = 'lib/src/utils/button_size.dart';
   static const String utilsFontSize = 'lib/src/utils/font_size.dart';
+  static const String utilsHelper = 'lib/src/utils/helper.dart';
   static const String utilsJwt = 'lib/src/utils/jwt.dart';
   static const String welcomeSelectRoleScreen = 'lib/src/ui/screens/welcome/select_role_screen.dart';
   static const String widgetsChangePasswordDialog = 'lib/src/ui/widgets/change_password_dialog.dart';

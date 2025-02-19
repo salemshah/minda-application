@@ -92,12 +92,13 @@ class _ParentChildRegistrationScreenState
   }
 
   // Widget pour afficher l'en-tête d'une section avec titre et description.
-  Widget buildSectionHeader(String title, String description) {
+  Widget buildSectionHeader(String title, String description,
+      {bool isDivided = true}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(children: <Widget>[
-          Expanded(child: Divider()),
+          if (isDivided) Expanded(child: Divider()),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
@@ -105,7 +106,7 @@ class _ParentChildRegistrationScreenState
               style: TextStyle(fontSize: 17.sp, fontWeight: FontWeight.bold),
             ),
           ),
-          Expanded(child: Divider()),
+          if (isDivided) Expanded(child: Divider()),
         ]),
         const SizedBox(height: 4),
         Text(
@@ -153,10 +154,9 @@ class _ParentChildRegistrationScreenState
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // Section 1: Informations personnelles.
-                    buildSectionHeader(
-                      "Informations personnelles",
-                      "Veuillez renseigner les informations personnelles de l'enfant.",
-                    ),
+                    buildSectionHeader("Informations personnelles",
+                        "Veuillez renseigner les informations personnelles de l'enfant.",
+                        isDivided: false),
                     CustomTextFormField(
                       controller: _firstNameController,
                       hintText: "Prénom",

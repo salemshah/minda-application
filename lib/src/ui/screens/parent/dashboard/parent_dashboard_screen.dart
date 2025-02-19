@@ -21,19 +21,17 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
     });
   }
 
+  final List<Widget> pages = <Widget>[
+    Center(child: MainDashboard()),
+    Center(child: ChildrenListScreen()),
+    Center(child: ParentProfileScreen()),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = <Widget>[
-      Center(child: MainDashboard()),
-      Center(child: ChildrenListScreen()),
-      Center(child: ParentProfileScreen()),
-    ];
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Dashboard"),
-      ),
-      body: SafeArea(child: pages[_selectedIndex]),
+      // backgroundColor: Color(0xFF6959C3),
+      body: pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,

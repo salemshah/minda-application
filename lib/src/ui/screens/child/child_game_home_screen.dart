@@ -122,7 +122,7 @@ class LandscapeMode extends StatelessWidget {
         SizedBox(height: isApplyHeight ? mainSize * .04 : 0),
         Container(
           decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.white.withValues(alpha: .2),
               borderRadius: BorderRadius.all(
                 Radius.circular(100),
               )),
